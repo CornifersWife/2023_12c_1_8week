@@ -4,39 +4,37 @@ using UnityEngine;
 
 public class CrabMovement : MonoBehaviour
 {
-    [SerializeField] private int moveSpeed = 3;
+    [SerializeField] private float moveSpeed = 3;
+    [SerializeField] private Transform[] patrolPoints;
 
-    private enum MovementState { idle, running, jumping, falling };
-    private MovementState state;
+    private enum MovementState { idle, running, jumping, falling};
     
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
-    private int dir;
+    private int patrolDestination;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = rb.GetComponent<SpriteRenderer>();
         animator = rb.GetComponent<Animator>();
-
-        dir = (int)(Random.value*3)-1;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if(dir > 0)
-            spriteRenderer.flipX = true;
-        else if(dir < 0)
-            spriteRenderer.flipX = false;
+        
+        rb.velocity = new Vector2((rb.position.x - patrolPoints[patrolDestination].position.x)<0?moveSpeed:-moveSpeed, rb.velocity.y);
+        if (Mathf.Abs(rb.position.x - patrolPoints[patrolDestination].position.x) < .2f)
+        {
+            patrolDestination++;
+            if (patrolDestination >= patrolPoints.Length) patrolDestination = 0;
+        }
+    
         updateAnimation();
+    }
 
-    }
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(dir * moveSpeed, rb.velocity.y);
-    }
+  
 
 
     private void updateAnimation()
