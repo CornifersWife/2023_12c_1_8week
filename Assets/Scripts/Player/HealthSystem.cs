@@ -20,12 +20,12 @@ public class PlayerHealth : MonoBehaviour
         health -= dmg;
         if(health <= 0)
         {
-            animator.SetTrigger("Player_DeadHit");
+            animator.SetTrigger("DeadHit");
             Destroy(this.gameObject);
             //@todo player death
         }
         else
-            animator.SetTrigger("Player_Hit");
+            animator.SetTrigger("Hit");
     }
     public void heal(int heal)
     {

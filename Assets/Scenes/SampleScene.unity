@@ -13807,9 +13807,11 @@ GameObject:
   - component: {fileID: 573188290}
   - component: {fileID: 573188289}
   - component: {fileID: 573188288}
-  - component: {fileID: 573188291}
+  - component: {fileID: 573188292}
+  - component: {fileID: 573188294}
+  - component: {fileID: 573188293}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Crab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13824,7 +13826,7 @@ Transform:
   m_GameObject: {fileID: 573188286}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.26, y: 0.172, z: 0}
+  m_LocalPosition: {x: 3.28, y: 3.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13954,7 +13956,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &573188291
+--- !u!95 &573188292
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573188286}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a042823233b3fd4ea7601de4b053a55, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &573188293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13963,11 +13986,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 573188286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f6786526f4a431489729392a337c930, type: 3}
+  m_Script: {fileID: 11500000, guid: 2037b5747250fdf41afb5877a3d213f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
-  playerHealth: {fileID: 471448781}
+  moveSpeed: 3
+--- !u!114 &573188294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573188286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03dfb91f7a5c4b84697258daf7f894dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  health: 0
 --- !u!1 &1517955250
 GameObject:
   m_ObjectHideFlags: 0

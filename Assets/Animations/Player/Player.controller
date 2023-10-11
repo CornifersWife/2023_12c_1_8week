@@ -34,7 +34,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Player_DeadHit
+    m_ConditionEvent: DeadHit
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7607290213731707227}
@@ -57,7 +57,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_DeadGround
+  m_Name: DeadGround
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -83,7 +83,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_DeadHit
+  m_Name: DeadHit
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -182,7 +182,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_Running
+  m_Name: Running
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -231,7 +231,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_Idle
+  m_Name: Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -283,7 +283,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_Jumping
+  m_Name: Jumping
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -337,7 +337,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Player_Hit
+    m_ConditionEvent: Hit
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8073454435496419602}
@@ -416,13 +416,13 @@ AnimatorController:
     m_DefaultInt: 2
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Player_Hit
+  - m_Name: Hit
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Player_DeadHit
+  - m_Name: DeadHit
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -498,7 +498,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_DoubleJump
+  m_Name: DoubleJump
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -575,7 +575,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_Ground
+  m_Name: Ground
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -602,7 +602,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_Falling
+  m_Name: Falling
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -629,7 +629,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_Hit
+  m_Name: Hit
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
