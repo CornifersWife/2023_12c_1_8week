@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private float axisR;
+    public static Vector2 lastCheckpointPos;
 
     private bool isGrounded;
     private bool hasDoubleJumped;
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = false;
         hasDoubleJumped = true;
         hasJumped = false;
+        GameObject.FindGameObjectWithTag("Player").transform.position = lastCheckpointPos;
     }
 
     
