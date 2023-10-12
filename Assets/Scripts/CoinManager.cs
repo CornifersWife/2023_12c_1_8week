@@ -10,6 +10,11 @@ public class CoinManager : MonoBehaviour
     private int coins;
     [SerializeField] Text coinText;
 
+    public int Coins 
+    { 
+        get { return coins; }
+        set { coins = value; }
+    }
     public void Awake()
     {
         instance = this;
@@ -31,12 +36,4 @@ public class CoinManager : MonoBehaviour
         coins += value;  
         UpdateHUD();
     }
-
-    public void SetValue(int value) 
-    { 
-        coins = value;    
-        UpdateHUD();
-    }
-
-
 }
