@@ -6,6 +6,7 @@ public class CoinCollection : MonoBehaviour
 {
     private Rigidbody2D _rb;
     private Animator _animator;
+    [SerializeField] int coinValue;
 
     private void Awake()
     {
@@ -23,7 +24,7 @@ public class CoinCollection : MonoBehaviour
         {
             Destroy(_rb.GetComponent<Collider2D>());
             _animator.SetBool("Collected", true);
-            
+            CoinManager.instance.AddValue(coinValue);
         }
     }
 }
