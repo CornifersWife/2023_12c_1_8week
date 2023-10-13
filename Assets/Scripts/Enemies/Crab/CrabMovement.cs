@@ -36,15 +36,14 @@ public class CrabMovement : MonoBehaviour
         timeLeftToAttack = attackPreparationTime;
         timeLeftToFinishAttack = attackAnimationTime;
     }
-
-    void FixedUpdate()
+    private void Update()
     {
         if (hasAttacked)
         {
             timeLeftToFinishAttack -= Time.deltaTime;
             if (timeLeftToFinishAttack > 0)
                 return;
-            
+
             hasAttacked = false;
             timeLeftToFinishAttack = attackAnimationTime;
         }
@@ -53,15 +52,15 @@ public class CrabMovement : MonoBehaviour
             timeLeftToAttack -= Time.deltaTime;
             if (timeLeftToAttack > 0)
                 return;
-            
+
             if (playerDetectorShortRange != null && playerDetectorShortRange.isPlayerDetected)
                 playerHealth.takeDamage(attackDamage);
-            
+
             timeLeftToAttack = attackPreparationTime;
-            hasAttacked = true;            
+            hasAttacked = true;
         }
-        
-        if(playerDetectorLongRange != null ) 
+
+        if (playerDetectorLongRange != null)
         {
             if (playerDetectorLongRange.isPlayerDetected)
             {
@@ -74,30 +73,21 @@ public class CrabMovement : MonoBehaviour
             else
                 isPreparingToAttack = false;
         }
-        
-        /*
-        if (playerDetectorShortRange != null && playerDetectorShortRange.isPlayerDetected && isPreparingToAttack && timeLeftToAttack <= 0)
-        {
-            isPreparingToAttack = false;
-            timeLeftToAttack = attackPreparationTime;
-
-            hasAttacked = true;
-            attackTimeLeft = attackAnimationTime;
-            playerHealth.takeDamage(attackDamage);
-        }*/
-        
-        if (!isPreparingToAttack && !hasAttacked) 
-        {
-            rb.velocity = new Vector2((rb.position.x - patrolPoints[patrolDestination].position.x)<0?moveSpeed:-moveSpeed, rb.velocity.y);
-            if (Mathf.Abs(rb.position.x - patrolPoints[patrolDestination].position.x) < .2f)
-            {
-                patrolDestination++;
-                if (patrolDestination >= patrolPoints.Length)
-                    patrolDestination = 0;
-            }
-        }
-    
+                
         updateAnimation();
+    }
+    void FixedUpdate()
+    {
+        if (isPreparingToAttack || hasAttacked)
+            return;
+
+        rb.velocity = new Vector2((rb.position.x - patrolPoints[patrolDestination].position.x) < 0 ? moveSpeed : -moveSpeed, rb.velocity.y);
+        if (Mathf.Abs(rb.position.x - patrolPoints[patrolDestination].position.x) < .2f)
+        {
+            patrolDestination++;
+            if (patrolDestination >= patrolPoints.Length)
+                patrolDestination = 0;
+        }
     }
 
   
@@ -105,8 +95,27 @@ public class CrabMovement : MonoBehaviour
 
     private void updateAnimation()
     {
+        int state = updateMovementState();   
+        if (animator.GetInteger("State") != (int)state)
+            animator.SetInteger("State", (int)state);
+    }
+    
+    private int updateMovementState()
+    {
         MovementState state = MovementState.idle;
-        
+
+        if (hasAttacked)
+        {
+            state = MovementState.attack;
+            return (int)state;
+        }
+
+        if (isPreparingToAttack)
+        {
+            state = MovementState.anticipating;
+            return (int)state;
+        }
+
         if (rb.velocity.x < 0f)
         {
             state = MovementState.running;
@@ -125,19 +134,8 @@ public class CrabMovement : MonoBehaviour
         else if (rb.velocity.y < -0.1f)
         {
             state = MovementState.falling;
-
         }
 
-        if (isPreparingToAttack)
-        {
-            state = MovementState.anticipating;
-        }
-
-        if (hasAttacked)
-        {
-            state = MovementState.attack;
-        }
-        if (animator.GetInteger("State") != (int)state)
-            animator.SetInteger("State", (int)state);
+        return (int)state;
     }
 }
