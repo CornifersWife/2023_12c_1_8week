@@ -6,7 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float jumpHeight = 7f;
     [SerializeField] private float moveSpeed = 7f;
-
+    [SerializeField] private Transform feet;
+    [SerializeField] private LayerMask groundLayer;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -32,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         axisR = Input.GetAxisRaw("Horizontal");
-       
+        checkGrounded();
         if (Input.GetButtonDown("Jump") && !hasDoubleJumped)
         {
             hasJumped = true;
@@ -51,15 +52,19 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void checkGrounded()
     {
-        isGrounded = true;
-        hasDoubleJumped = false;
+        if (Physics2D.OverlapCircle(feet.position, 0.3f, groundLayer))
+        {
+            isGrounded = true;
+            hasDoubleJumped = false;
+        }
+        else
+        {
+            isGrounded = false;
+        }
     }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        isGrounded = false;
-    }
+ 
     private void updateAnimation()
     {
         MovementState state = MovementState.idle;
