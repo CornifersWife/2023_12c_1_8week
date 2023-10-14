@@ -15,13 +15,15 @@ public class CrabMovement : MonoBehaviour
     [SerializeField] private int attackDamage = 2;
     [SerializeField] private PlayerHealth playerHealth;
 
+
     private enum MovementState { idle, running, jumping, falling, anticipating, attack};
     
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private int patrolDestination;
-    
+    private HealthSystem healthSystem;
+
     private float timeLeftToAttack;
     private float timeLeftToFinishAttack;
 
@@ -33,11 +35,14 @@ public class CrabMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = rb.GetComponent<SpriteRenderer>();
         animator = rb.GetComponent<Animator>();
+        healthSystem = rb.GetComponent<HealthSystem>();
         timeLeftToAttack = attackPreparationTime;
         timeLeftToFinishAttack = attackAnimationTime;
     }
     private void Update()
     {
+        if (healthSystem != null && healthSystem.isDead) return;
+    
         if (hasAttacked)
         {
             timeLeftToFinishAttack -= Time.deltaTime;
@@ -119,12 +124,12 @@ public class CrabMovement : MonoBehaviour
         if (rb.velocity.x < 0f)
         {
             state = MovementState.running;
-            spriteRenderer.flipX = false;
+            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
         }
         else if (rb.velocity.x > 0f)
         {
             state = MovementState.running;
-            spriteRenderer.flipX = true;
+            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
         }
 
         if (rb.velocity.y > 0.1f)
