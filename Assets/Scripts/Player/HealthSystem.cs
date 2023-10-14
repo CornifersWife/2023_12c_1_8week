@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 10;
     public int health;
+    public static Vector2 lastCheckpointPos;
     
     private Animator animator;
 
@@ -21,8 +22,8 @@ public class PlayerHealth : MonoBehaviour
         if(health <= 0)
         {
             animator.SetTrigger("DeadHit");
-            Destroy(this.gameObject);
-            //@todo player death
+            health = maxHealth;
+            this.gameObject.transform.position = lastCheckpointPos;
         }
         else
             animator.SetTrigger("Hit");
