@@ -11,6 +11,16 @@ TagManager:
   - 
   - Water
   - UI
+  - Player
+  - Enemy
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - Floor
   - 
   - 
@@ -18,17 +28,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - background
   - 
   - 
   - 
