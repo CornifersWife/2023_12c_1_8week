@@ -6,7 +6,8 @@ public class Deatharea : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.transform.position = PlayerHealth.lastCheckpointPos;
+            PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+            playerHealth.takeDamage(playerHealth.maxHealth);
         }
     }
 }
