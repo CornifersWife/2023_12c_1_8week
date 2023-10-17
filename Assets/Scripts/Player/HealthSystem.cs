@@ -41,8 +41,8 @@ public class PlayerHealth : MonoBehaviour
     }
     public void Respawn()
     {
-        gameObject.transform.position = lastCheckpointPos;
         animator.SetTrigger("Dead");
+        gameObject.transform.position = lastCheckpointPos;
         health = maxHealth;
         playerMovement.enabled = true;
     }
