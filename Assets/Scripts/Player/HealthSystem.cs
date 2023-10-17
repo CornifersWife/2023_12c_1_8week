@@ -10,20 +10,17 @@ public class PlayerHealth : MonoBehaviour
     public static Vector2 lastCheckpointPos;
     
     private Animator animator;
+    private PlayerMovement playerMovement;
 
+    private void Awake()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+    }
+    
     private void Start()
     {
         health = maxHealth;
         animator = GetComponent<Animator>();
-    }
-
-    private void Update()
-    {
-        if (health <= 0 && Input.GetKeyDown(KeyCode.R))
-        {
-            respawn();
-            animator.Play("Idle");
-        }
     }
 
     public void takeDamage(int dmg)
@@ -31,8 +28,9 @@ public class PlayerHealth : MonoBehaviour
         health -= dmg;
         if(health <= 0)
         {
+            playerMovement.enabled = false;
             animator.SetTrigger("DeadHit");
-            gameObject.GetComponent<PlayerMovement>().enabled = false;
+            Respawn();
         }
         else
             animator.SetTrigger("Hit");
@@ -41,11 +39,11 @@ public class PlayerHealth : MonoBehaviour
     {
         health += heal;
     }
-
-    public void respawn()
+    public void Respawn()
     {
         gameObject.transform.position = lastCheckpointPos;
+        animator.SetTrigger("Dead");
         health = maxHealth;
-        gameObject.GetComponent<PlayerMovement>().enabled = true;
+        playerMovement.enabled = true;
     }
 }
