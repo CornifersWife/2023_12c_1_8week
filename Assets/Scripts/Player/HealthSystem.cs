@@ -11,6 +11,8 @@ public class PlayerHealth : MonoBehaviour
     
     private Animator animator;
     private PlayerMovement playerMovement;
+    [SerializeField] private float respawnTime = 3;
+    private float timer = 0;
 
     private void Awake()
     {
@@ -23,6 +25,19 @@ public class PlayerHealth : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        if (health <= 0)
+        {
+            timer += Time.deltaTime;
+            if(timer > respawnTime)
+            {
+                Respawn();
+                timer = 0;
+            }
+        }
+    }
+
     public void takeDamage(int dmg)
     {
         health -= dmg;
@@ -30,7 +45,6 @@ public class PlayerHealth : MonoBehaviour
         {
             playerMovement.enabled = false;
             animator.SetTrigger("DeadHit");
-            Respawn();
         }
         else
             animator.SetTrigger("Hit");
