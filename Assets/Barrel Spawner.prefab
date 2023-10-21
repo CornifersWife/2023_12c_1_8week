@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5745c96d62e00fd4c9feb7b32d0e63b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrel: {fileID: 6602514745810177779, guid: 2940937d66584a243be22db747ba33c0, type: 3}
+  barrel: {fileID: 2181539164285208709, guid: f00cdad4be0632543b893ded769ec5d1, type: 3}
   cooldown: 5
