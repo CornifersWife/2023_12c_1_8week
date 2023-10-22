@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] public bool canDoubleJump;
     [SerializeField] private float jumpHeight = 7f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private Transform feet;
@@ -55,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         hasDoubleJumped = true;
         hasJumped = false;
         canAttack = true;
+        canDoubleJump = false;
     }
 
 
@@ -88,11 +90,30 @@ public class PlayerMovement : MonoBehaviour
     //wywo³ywane przez inputManager gdy player ma skoczyæ
     public void jump(InputAction.CallbackContext context)
     {
-        if (!context.performed) return; 
-        if (!hasDoubleJumped)
+        if (!context.performed) return;
+        if (hasJumped) return;
+        if (isGrounded)
         {
             hasJumped = true;
-            if (!isGrounded) hasDoubleJumped = true;
+            return;
+        }
+        if (!hasDoubleJumped && canDoubleJump)
+        {
+            hasDoubleJumped = true;
+            hasJumped = true;
+        }
+    }
+    public void checkGrounded()
+    {
+        //robi kó³ko dooko³a stóp gracza i szuka czy jest tam coœ z zmiennej LayerMask )
+        if (Physics2D.OverlapCircle(feet.position, 0.3f, groundLayer))
+        {
+            isGrounded = true;
+            hasDoubleJumped = false;
+        }
+        else
+        {
+            isGrounded = false;
         }
     }
     //wywo³ywane przez inputManager gdy player zmienia broñ
@@ -116,19 +137,6 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    public void checkGrounded()
-    {
-        //robi kó³ko dooko³a stóp gracza i szuka czy jest tam coœ z zmiennej LayerMask )
-        if (Physics2D.OverlapCircle(feet.position, 0.3f, groundLayer))
-        {
-            isGrounded = true;
-            hasDoubleJumped = false;
-        }
-        else
-        {
-            isGrounded = false;
-        }
-    }
     public void attack(InputAction.CallbackContext context)
     {
         if (!canAttack) return;
