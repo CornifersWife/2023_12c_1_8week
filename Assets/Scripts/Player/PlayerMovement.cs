@@ -128,7 +128,9 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = false;
         }
+
     }
+    
     public void attack(InputAction.CallbackContext context)
     {
         if (!canAttack) return;

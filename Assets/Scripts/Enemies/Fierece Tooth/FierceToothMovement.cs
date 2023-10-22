@@ -50,6 +50,8 @@ public class CrabMovement : MonoBehaviour
     
     void FixedUpdate()
     {
+        if (healthSystem != null && healthSystem.isDead) return;
+
         if (isPreparingToAttack || hasAttacked)
         {
             rb.velocity = Vector3.zero;
