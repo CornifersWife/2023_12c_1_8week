@@ -28,12 +28,17 @@ public class Barrel : MonoBehaviour
         {
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             playerHealth.takeDamage(playerHealth.maxHealth);
-            animator.SetTrigger("IsDestroyed");
             StartCoroutine(Break());
         }
+        
+        else if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Barrel"))
+        {
+            StartCoroutine(Break());
+            Destroy(other.gameObject);
+        }
+        
         else if (other.gameObject.CompareTag("Wall"))
         {
-            animator.SetTrigger("IsDestroyed");
             StartCoroutine(Break());
         }
     }
@@ -45,6 +50,7 @@ public class Barrel : MonoBehaviour
     
     private IEnumerator Break()
     {
+        animator.SetTrigger("IsDestroyed");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         Destroy(gameObject);
     }
