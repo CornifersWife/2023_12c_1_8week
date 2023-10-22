@@ -51,7 +51,11 @@ public class CrabMovement : MonoBehaviour
     void FixedUpdate()
     {
         if (isPreparingToAttack || hasAttacked)
+        {
+            rb.velocity = Vector3.zero;
             return;
+        }
+            
 
         rb.velocity = new Vector2((rb.position.x - patrolPoints[patrolDestination].position.x) < 0 ? moveSpeed : -moveSpeed, rb.velocity.y);
         if (Mathf.Abs(rb.position.x - patrolPoints[patrolDestination].position.x) < .2f)
