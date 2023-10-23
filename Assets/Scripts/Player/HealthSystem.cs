@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,33 +7,61 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 10;
     public int health;
+    public static Vector2 lastCheckpointPos;
     
     private Animator animator;
+    private PlayerMovement playerMovement;
+    [SerializeField] private float respawnTime = 3;
+    private float timer = 0;
 
+    private void Awake()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+    }
+    
     private void Start()
     {
         health = maxHealth;
         animator = GetComponent<Animator>();
     }
-    //wywo³ywane z innych skryptów gdy player ma dostaæ jakiœ dmg
+
+   private void Update()
+    {
+        if (health <= 0)
+        {
+            timer += Time.deltaTime;
+            if(timer > respawnTime)
+            {
+                Respawn();
+                timer = 0;
+            }
+        }
+    }
+    
+  //wywoï¿½ywane z innych skryptï¿½w gdy player ma dostaï¿½ jakiï¿½ dmg
     public void takeDamage(int dmg)
     {
         health -= dmg;
-        //je¿eli umiera (hp<0)
+        //jeï¿½eli umiera (hp<0)
         if(health <= 0)
         {
-            //animacja œmiertelnego ciosu
+            playerMovement.enabled = false;
             animator.SetTrigger("DeadHit");
-            Destroy(this.gameObject);
-            //@todo player death
         }
         else
             animator.SetTrigger("Hit");
     }
 
-    //jakbyœmy kiedyœ heal chcieli zrobiæ 
+    //jakbyï¿½my kiedyï¿½ heal chcieli zrobiï¿½ 
     public void heal(int heal)
     {
         health += heal;
+    }
+    public void Respawn()
+    {
+        animator.SetTrigger("Dead");
+        gameObject.transform.position = lastCheckpointPos;
+        health = maxHealth;
+        playerMovement.enabled = true;
     }
 }
