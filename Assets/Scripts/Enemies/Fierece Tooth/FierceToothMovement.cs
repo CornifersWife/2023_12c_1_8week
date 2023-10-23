@@ -8,11 +8,10 @@ public class CrabMovement : MonoBehaviour
     [SerializeField] private Transform[] patrolPoints;
 
     [Header("Attack")]
-    [SerializeField] private AIPlayerDetector playerDetectorLongRange;
     [SerializeField] private AIPlayerDetector playerDetectorShortRange;
-    [SerializeField] private float attackPreparationTime = 2.0f;
+    [SerializeField] private float attackPreparationTime = 0f;
     [SerializeField] private float attackAnimationTime = 1.0f;
-    [SerializeField] private int attackDamage = 2;
+    [SerializeField] private int attackDamage = 1;
     [SerializeField] private PlayerHealth playerHealth;
 
 
@@ -42,49 +41,23 @@ public class CrabMovement : MonoBehaviour
     private void Update()
     {
         if (healthSystem != null && healthSystem.isDead) return;
-    
-        if (hasAttacked)
-        {
-            timeLeftToFinishAttack -= Time.deltaTime;
-            if (timeLeftToFinishAttack > 0)
-                return;
 
-            hasAttacked = false;
-            timeLeftToFinishAttack = attackAnimationTime;
-        }
-        else if (isPreparingToAttack)
-        {
-            timeLeftToAttack -= Time.deltaTime;
-            if (timeLeftToAttack > 0)
-                return;
-
-            if (playerDetectorShortRange != null && playerDetectorShortRange.isPlayerDetected)
-                playerHealth.takeDamage(attackDamage);
-
-            timeLeftToAttack = attackPreparationTime;
-            hasAttacked = true;
-        }
-
-        if (playerDetectorLongRange != null)
-        {
-            if (playerDetectorLongRange.isPlayerDetected)
-            {
-                if (!isPreparingToAttack)
-                {
-                    timeLeftToAttack = attackPreparationTime;
-                    isPreparingToAttack = true;
-                }
-            }
-            else
-                isPreparingToAttack = false;
-        }
-                
+        updateAttack();
+        
+        
         updateAnimation();
     }
+    
     void FixedUpdate()
     {
+        if (healthSystem != null && healthSystem.isDead) return;
+
         if (isPreparingToAttack || hasAttacked)
+        {
+            rb.velocity = Vector3.zero;
             return;
+        }
+            
 
         rb.velocity = new Vector2((rb.position.x - patrolPoints[patrolDestination].position.x) < 0 ? moveSpeed : -moveSpeed, rb.velocity.y);
         if (Mathf.Abs(rb.position.x - patrolPoints[patrolDestination].position.x) < .2f)
@@ -96,6 +69,33 @@ public class CrabMovement : MonoBehaviour
     }
 
   
+    private void updateAttack()
+    {
+        if (hasAttacked)
+        {
+            timeLeftToFinishAttack -= Time.deltaTime;
+            if (timeLeftToFinishAttack > 0)
+                return;
+
+            hasAttacked = false;
+            timeLeftToFinishAttack = attackAnimationTime;
+        }
+
+        if (timeLeftToAttack > 0) timeLeftToAttack -= Time.deltaTime;
+        isPreparingToAttack = playerDetectorShortRange.isPlayerDetected;
+        if (isPreparingToAttack)
+        {
+
+            if (timeLeftToAttack > 0)
+                return;
+
+            if (playerDetectorShortRange != null && playerDetectorShortRange.isPlayerDetected)
+                playerHealth.takeDamage(attackDamage);
+
+            timeLeftToAttack = attackPreparationTime;
+            hasAttacked = true;
+        }
+    }
 
 
     private void updateAnimation()

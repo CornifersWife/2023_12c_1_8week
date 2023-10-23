@@ -25,7 +25,7 @@ public class PlayerHealth : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void Update()
+   private void Update()
     {
         if (health <= 0)
         {
@@ -37,10 +37,12 @@ public class PlayerHealth : MonoBehaviour
             }
         }
     }
-
+    
+  //wywo�ywane z innych skrypt�w gdy player ma dosta� jaki� dmg
     public void takeDamage(int dmg)
     {
         health -= dmg;
+        //je�eli umiera (hp<0)
         if(health <= 0)
         {
             playerMovement.enabled = false;
@@ -49,6 +51,8 @@ public class PlayerHealth : MonoBehaviour
         else
             animator.SetTrigger("Hit");
     }
+
+    //jakby�my kiedy� heal chcieli zrobi� 
     public void heal(int heal)
     {
         health += heal;
