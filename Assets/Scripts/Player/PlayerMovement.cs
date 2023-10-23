@@ -134,24 +134,6 @@ public class PlayerMovement : MonoBehaviour
             canAttack = false; 
         }
     }
-
-
-
-
-    public void checkGrounded()
-    {
-        //robi kó³ko dooko³a stóp gracza i szuka czy jest tam coœ z zmiennej LayerMask )
-        if (Physics2D.OverlapCircle(feet.position, 0.3f, groundLayer))
-        {
-            isGrounded = true;
-            hasDoubleJumped = false;
-        }
-        else
-        {
-            isGrounded = false;
-        }
-
-    }
     
     public void attack(InputAction.CallbackContext context)
     {
