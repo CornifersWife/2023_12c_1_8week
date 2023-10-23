@@ -13,7 +13,7 @@ public class CoinManager : MonoBehaviour
     public int Coins 
     { 
         get { return coins; }
-        set { coins = value; }
+        set { coins = value; UpdateHUD(); }
     }
     public void Awake()
     {
