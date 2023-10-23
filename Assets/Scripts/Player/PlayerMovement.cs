@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] public bool canDoubleJump;
     [SerializeField] private float jumpHeight = 7f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private Transform feet;
@@ -42,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     private float swordAttackCooldownLeft = 0;
     private float attackDamageTimeLeft = 0;
 
-    // odpowaiada za zmianê aktualnej animacji
+    // odpowaiada za zmianÃª aktualnej animacji
     private enum MovementState { idle, running, jumping, falling, doubleJump, swordAttack_1, swordAttack_2, swordAttack_3, swordAirAttack_1, swordAirAttack_2, swordThrow};
 
     
@@ -55,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         hasDoubleJumped = true;
         hasJumped = false;
         canAttack = true;
+        canDoubleJump = false;
     }
 
 
@@ -63,11 +65,11 @@ public class PlayerMovement : MonoBehaviour
     {
         
         axisR = Input.GetAxisRaw("Horizontal");
-        //sprawddza czy stopy dotykaj¹ ziemi (potrzebne do double jump)
+        //sprawddza czy stopy dotykajÂ¹ ziemi (potrzebne do double jump)
         checkGrounded();
-        //je¿eli cooldown z ataku mieczem nie min¹³ to zmniejsza ile go zosta³o
+        //jeÂ¿eli cooldown z ataku mieczem nie minÂ¹Â³ to zmniejsza ile go zostaÂ³o
         if(swordAttackCooldownLeft > 0) swordAttackCooldownLeft-= Time.deltaTime;
-        //je¿eli miecz ma nadal zadawaæ dmg to zmniejsza ile zosta³o czasu w którym nadal bêdzie zadawaæ
+        //jeÂ¿eli miecz ma nadal zadawaÃ¦ dmg to zmniejsza ile zostaÂ³o czasu w ktÃ³rym nadal bÃªdzie zadawaÃ¦
         if(attackDamageTimeLeft > 0) attackDamageTimeLeft -= Time.deltaTime;
         
         updateAnimation();
@@ -78,37 +80,56 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(axisR * moveSpeed, rb.velocity.y);
         if (hasJumped)
         {
-            //dodaje jumpHeight jako si³e skoku do gracza
+            //dodaje jumpHeight jako siÂ³e skoku do gracza
             rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
             hasJumped = false;
         }
 
     }
 
-    //wywo³ywane przez inputManager gdy player ma skoczyæ
+    //wywoÂ³ywane przez inputManager gdy player ma skoczyÃ¦
     public void jump(InputAction.CallbackContext context)
     {
-        if (!context.performed) return; 
-        if (!hasDoubleJumped)
+        if (!context.performed) return;
+        if (hasJumped) return;
+        if (isGrounded)
         {
             hasJumped = true;
-            if (!isGrounded) hasDoubleJumped = true;
+            return;
+        }
+        if (!hasDoubleJumped && canDoubleJump)
+        {
+            hasDoubleJumped = true;
+            hasJumped = true;
         }
     }
-    //wywo³ywane przez inputManager gdy player zmienia broñ
-    public void changeWeapon(InputAction.CallbackContext context)
+    public void checkGrounded()
     {
-        if (!context.performed) return;
-        //je¿eli player ma domyœln¹ wersje bez broni
-        if (animator.runtimeAnimatorController == animatorBasic)
+        //robi kÃ³Â³ko dookoÂ³a stÃ³p gracza i szuka czy jest tam coÅ“ z zmiennej LayerMask )
+        if (Physics2D.OverlapCircle(feet.position, 0.3f, groundLayer))
         {
-            //zmieñ na wersjê z broni¹
-            animator.runtimeAnimatorController = animatorWithSword;
-            canAttack = true; // jak ma broñ to mo¿e atakowaæ
+            isGrounded = true;
+            hasDoubleJumped = false;
         }
         else
         {
-            //i na odwrót
+            isGrounded = false;
+        }
+    }
+    //wywoÂ³ywane przez inputManager gdy player zmienia broÃ±
+    public void changeWeapon(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        //jeÂ¿eli player ma domyÅ“lnÂ¹ wersje bez broni
+        if (animator.runtimeAnimatorController == animatorBasic)
+        {
+            //zmieÃ± na wersjÃª z broniÂ¹
+            animator.runtimeAnimatorController = animatorWithSword;
+            canAttack = true; // jak ma broÃ± to moÂ¿e atakowaÃ¦
+        }
+        else
+        {
+            //i na odwrÃ³t
             animator.runtimeAnimatorController = animatorBasic;
             canAttack = false; 
         }
@@ -116,9 +137,10 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+
     public void checkGrounded()
     {
-        //robi kó³ko dooko³a stóp gracza i szuka czy jest tam coœ z zmiennej LayerMask )
+        //robi kÃ³Â³ko dookoÂ³a stÃ³p gracza i szuka czy jest tam coÅ“ z zmiennej LayerMask )
         if (Physics2D.OverlapCircle(feet.position, 0.3f, groundLayer))
         {
             isGrounded = true;
@@ -135,10 +157,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!canAttack) return;
         if (!context.performed) return;
-        //je¿eli cooldown min¹³ z poprzedniego ataku
+        //jeÂ¿eli cooldown minÂ¹Â³ z poprzedniego ataku
         if (swordAttackCooldownLeft <= 0)
         {
-            //je¿eli na ziemi to atak w stronê gdzie siê patrzy a jak nie to pod nim
+            //jeÂ¿eli na ziemi to atak w stronÃª gdzie siÃª patrzy a jak nie to pod nim
             //Coroutine jest jak Thread w javie
             if (isGrounded)
                 StartCoroutine(damageWhileSlahsing(attackGroundTransform, attackGroundRange));
@@ -146,18 +168,18 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(damageWhileSlahsing(attackAirTransform, attackAirRange));
         }
     }
-    //odpowiada za zadawanie obra¿eñ przez jakiœ czas w trakcie ataku 
+    //odpowiada za zadawanie obraÂ¿eÃ± przez jakiÅ“ czas w trakcie ataku 
     public IEnumerator damageWhileSlahsing(Transform transform, float range)
     {
         hasAttacked = true;
         //ustawia cooldowns
         swordAttackCooldownLeft = swordAttackCooldown;
         attackDamageTimeLeft = attackDamageTime;
-        //lista ude¿onych obiektów by nic 2 razy nie ude¿yæ
+        //lista udeÂ¿onych obiektÃ³w by nic 2 razy nie udeÂ¿yÃ¦
         List<HealthSystem> damaged = new List<HealthSystem>();
         while (attackDamageTimeLeft > 0)
         {
-            //pobiera wszystkich attackable z okrêgu dooko³a miecza
+            //pobiera wszystkich attackable z okrÃªgu dookoÂ³a miecza
             hits = Physics2D.CircleCastAll(transform.position, range, transform.right, 0f, attackableLayer);
             for (int i = 0; i < hits.Length; i++)
             {
@@ -177,13 +199,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //rysuje kó³eczka dooko³a miecza by mo¿na by³o to edytowaæ
+    //rysuje kÃ³Â³eczka dookoÂ³a miecza by moÂ¿na byÂ³o to edytowaÃ¦
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(attackGroundTransform.position, attackGroundRange);
         Gizmos.DrawWireSphere(attackAirTransform.position, attackAirRange);
     }
-    //zmienia animacje na podstawie state i  booleanów
+    //zmienia animacje na podstawie state i  booleanÃ³w
     private void updateAnimation()
     {
         MovementState state = MovementState.idle;
