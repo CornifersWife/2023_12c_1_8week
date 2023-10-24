@@ -22,7 +22,7 @@ public class DissapearPlatfrom : MonoBehaviour {
         _sp.color = Color.green;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnCollisionEnter2D(Collision2D other) {
         Debug.Log("OnTriggerEnter2D called");
         if (_ready) {
             _ready = false;
