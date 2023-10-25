@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class DestructibleBox : MonoBehaviour
 {
-    private Animator _animator;
+    private Animator animator;
 
     void Awake()
     {
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
     void Start()
     {
@@ -19,6 +19,14 @@ public class DestructibleBox : MonoBehaviour
     {
         
     }
-    
-    
+    public IEnumerator GetHit()
+    {
+        animator.SetTrigger("IsHit");
+        animator.SetInteger("HitCount", animator.GetInteger("HitCount")+1);
+        if (animator.GetInteger("HitCount") >= 2)
+        {
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            Destroy(gameObject);   
+        }
+    }
 }
