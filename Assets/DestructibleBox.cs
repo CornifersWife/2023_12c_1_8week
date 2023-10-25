@@ -28,5 +28,6 @@ public class DestructibleBox : MonoBehaviour
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             Destroy(gameObject);   
         }
+        //TODO: Poprawić ostatni etap animacji
     }
 }
