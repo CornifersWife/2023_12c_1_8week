@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DestructibleBox : MonoBehaviour
 {
+    [SerializeField] private GameObject shatteredVersion;
     private Animator animator;
 
     void Awake()
@@ -19,15 +20,20 @@ public class DestructibleBox : MonoBehaviour
     {
         
     }
-    public IEnumerator GetHit()
+    public void GetHit()
     {
         animator.SetTrigger("IsHit");
         animator.SetInteger("HitCount", animator.GetInteger("HitCount")+1);
-        if (animator.GetInteger("HitCount") >= 2)
+        if (animator.GetInteger("HitCount") == 2)
         {
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-            Destroy(gameObject);   
+            SwitchToShattered();   
         }
-        //TODO: Poprawić ostatni etap animacji
     }
+
+    private void SwitchToShattered()
+    {
+        Instantiate(shatteredVersion, transform.position, transform.rotation);
+        Destroy(gameObject);
+    }
+    
 }

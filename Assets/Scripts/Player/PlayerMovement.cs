@@ -195,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
         {
             foreach (KeyValuePair<int, DestructibleBox> destr in destructibles)
             {
-                StartCoroutine(destr.Value.GetHit());
+                destr.Value.GetHit();
             }
         }
     }
