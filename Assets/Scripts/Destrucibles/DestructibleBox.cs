@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
-public class DestructibleBox : MonoBehaviour
+public class DestructibleBox : Destructible
 {
-    [SerializeField] private GameObject shatteredVersion;
+    [SerializeField] public GameObject shatteredVersion;
     private Animator animator;
 
     void Awake()
@@ -20,7 +21,7 @@ public class DestructibleBox : MonoBehaviour
     {
         
     }
-    public void GetHit()
+    public override void GetHit()
     {
         animator.SetTrigger("IsHit");
         animator.SetInteger("HitCount", animator.GetInteger("HitCount")+1);
@@ -30,7 +31,7 @@ public class DestructibleBox : MonoBehaviour
         }
     }
 
-    private void SwitchToShattered()
+    public override void SwitchToShattered()
     {
         Instantiate(shatteredVersion, transform.position, transform.rotation);
         Destroy(gameObject);
