@@ -1,15 +1,13 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 
 public class DissapearPlatfrom : MonoBehaviour {
-    
     private SpriteRenderer _sp;
     private Collider2D _c2d;
 
     public bool _ready = true;
-    
+
     [SerializeField] private float _warningTime = 2.0f;
     [SerializeField] private float _respawnTime = 2.0f;
     
@@ -24,7 +22,7 @@ public class DissapearPlatfrom : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D other) {
         Debug.Log("OnTriggerEnter2D called");
-        if (_ready) {
+        if (_ready && other.relativeVelocity.y <0) {
             _ready = false;
             StartCoroutine(TriggerCollapse());
         }
@@ -32,11 +30,10 @@ public class DissapearPlatfrom : MonoBehaviour {
 
 
     private IEnumerator TriggerCollapse() {
-        
         //warning
         _sp.color = Color.yellow;
         yield return new WaitForSeconds(_warningTime);
-        
+
         //collapse
         _c2d.enabled = false;
         _sp.color = Color.red;
@@ -47,7 +44,4 @@ public class DissapearPlatfrom : MonoBehaviour {
         _sp.color = Color.green;
         _ready = true;
     }
-    
-
- 
 }
