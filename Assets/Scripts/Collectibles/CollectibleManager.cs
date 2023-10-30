@@ -25,7 +25,14 @@ public class CoinManager : MonoBehaviour
 
     public void Awake()
     {
-        instance = this;
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else 
+        {
+            instance = this;
+        }
     }
 
     public void Start()
