@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4467855363080798286}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.41, y: 0.12, z: 0}
+  m_LocalPosition: {x: -5.6899924, y: 0.013430953, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4b2a6db3e9e44948a0ded31465c04b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinValue: 1
+  _coinConfig: {fileID: 11400000, guid: d22916b04a75c084987580a3415c38bc, type: 2}
 --- !u!50 &1011593465371457968
 Rigidbody2D:
   serializedVersion: 4
