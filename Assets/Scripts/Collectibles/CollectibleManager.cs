@@ -5,12 +5,16 @@ public class CoinManager : MonoBehaviour
 {
     public static CoinManager instance { get; private set; }
 
-    private int coins
+    private int coins = 0;
+    private int diamonds = 0;
+
+    int Coins
     {
+
         get { return coins; }
         set { coins = value; UpdateHUD(); }
     }
-    private int diamonds
+    int Diamonds
     {
         get { return diamonds; }
         set { diamonds = value; UpdateHUD(); }
@@ -21,20 +25,11 @@ public class CoinManager : MonoBehaviour
 
     public void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
+        instance = this;
     }
 
     public void Start()
     {
-        coins = 0;
-        diamonds = 0;
         UpdateHUD();
     }
 
