@@ -13,14 +13,22 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject continueButton;
 
     private int index;
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void Start()
     {
-        StartDialogue();
+        StartCoroutine(StartDialogue());
     }
 
-    public void StartDialogue()
+    public IEnumerator StartDialogue()
     {
+        animator.SetTrigger("OpenBubble");
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         StartCoroutine(TypeDialogue());
     }
 
@@ -42,6 +50,11 @@ public class DialogueManager : MonoBehaviour
             index++;
             dialogueText.text = string.Empty;
             StartCoroutine(TypeDialogue());
+        }
+        else
+        {
+            dialogueText.text = string.Empty;
+            animator.SetTrigger("CloseBubble");
         }
     }
 }
