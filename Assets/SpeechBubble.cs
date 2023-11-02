@@ -44,18 +44,14 @@ public class SpeechBubble : MonoBehaviour
 
     private IEnumerator CloseDialogue()
     {
+        if (!finished)
+            index = 0;
         dialogueText.text = string.Empty;
         continueButton.SetActive(false);
         animator.SetTrigger("CloseBubble");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         if (finished)
-        {
             Destroy(gameObject);
-        }
-        else
-        {
-            index = 0;
-        }
     }
 
     private IEnumerator TypeDialogue()
