@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using TMPro;
 
-public class DialogueManager : MonoBehaviour
+public class SpeechBubble : MonoBehaviour
 {
     [SerializeField] private float typingSpeed = 0.05f;
     [SerializeField] private TextMeshProUGUI dialogueText;
@@ -11,8 +12,10 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private string[] dialogueSentences;
 
     [SerializeField] private GameObject continueButton;
+    [SerializeField] private GameObject hostEntity;
 
     private int index;
+    private bool finished;
     private Animator animator;
 
     private void Awake()
@@ -20,7 +23,14 @@ public class DialogueManager : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void Start()
+    private void Update()
+    {
+        Transform t = hostEntity.transform;
+        Vector3 newPosition = new Vector3(t.position.x, t.position.y + 1.5f, t.position.z);
+        transform.position = newPosition;
+    }
+
+    public void TriggerStartDialogue()
     {
         StartCoroutine(StartDialogue());
     }
@@ -30,6 +40,22 @@ public class DialogueManager : MonoBehaviour
         animator.SetTrigger("OpenBubble");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         StartCoroutine(TypeDialogue());
+    }
+
+    private IEnumerator CloseDialogue()
+    {
+        dialogueText.text = string.Empty;
+        continueButton.SetActive(false);
+        animator.SetTrigger("CloseBubble");
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        if (finished)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            index = 0;
+        }
     }
 
     private IEnumerator TypeDialogue()
@@ -53,8 +79,17 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            dialogueText.text = string.Empty;
-            animator.SetTrigger("CloseBubble");
+            finished = true;
+            StartCoroutine(CloseDialogue());
         }
+    }
+
+    public void Activate(bool state)
+    {
+        if (!state)
+        {
+            StartCoroutine(CloseDialogue());
+        }
+        gameObject.SetActive(state);
     }
 }
