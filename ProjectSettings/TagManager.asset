@@ -51,3 +51,6 @@ TagManager:
   - name: Terrain
     uniqueID: 2265949993
     locked: 0
+  - name: Dialogue
+    uniqueID: 3243664613
+    locked: 0
