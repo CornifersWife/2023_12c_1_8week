@@ -192,5 +192,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ready: 1
-  _warningTime: 2
+  _warningTime: 1
   _respawnTime: 2
