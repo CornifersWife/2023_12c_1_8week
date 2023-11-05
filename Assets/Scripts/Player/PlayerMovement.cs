@@ -16,7 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float attackDamageTime = .5f;
 
 
-    [SerializeField] private RuntimeAnimatorController[] animators;
+    [SerializeField] private RuntimeAnimatorController animatorBasic;
+    [SerializeField] private RuntimeAnimatorController animatorWithSword;
     [SerializeField] private Transform attackGroundTransform;
     [SerializeField] private Transform attackAirTransform;
     [SerializeField] private float attackGroundRange = 1;
@@ -41,15 +42,16 @@ public class PlayerMovement : MonoBehaviour
     private int sworAirAnimationType = 0;
     private float swordAttackCooldownLeft = 0;
     private float attackDamageTimeLeft = 0;
-    private int animatorType = 0;
 
     // odpowaiada za zmianê aktualnej animacji
     private enum MovementState { idle, running, jumping, falling, doubleJump, swordAttack_1, swordAttack_2, swordAttack_3, swordAirAttack_1, swordAirAttack_2, swordThrow};
 
     
+    PlayerManager playerManager;
     
     void Awake()
     {
+        if (playerManager == null) playerManager = PlayerManager.getInstance();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         isGrounded = false;
@@ -58,30 +60,32 @@ public class PlayerMovement : MonoBehaviour
 
         canAttack = true;
         canDoubleJump = false;
-
-        if (PlayerPrefs.HasKey("canAttack"))
+        Debug.Log(playerManager == null);
+        if (playerManager.values.ContainsKey("canAttack"))
         {
-            canAttack = PlayerPrefs.GetInt("canAttack") != 0;
+            canAttack = (bool)playerManager.values["canAttack"];
         }
-        if (PlayerPrefs.HasKey("canDoubleJump"))
+        if (playerManager.values.ContainsKey("canDoubleJump"))
         {
-            canDoubleJump = PlayerPrefs.GetInt("canDoubleJump") != 0;
+            Debug.Log("Loaded jump");
+            canDoubleJump = (bool)playerManager.values["canDoubleJump"];
         }
-        if (PlayerPrefs.HasKey("animatorType"))
+        if (playerManager.values.ContainsKey("animator"))
         {
-            animatorType = PlayerPrefs.GetInt("animatorType");
-            animator.runtimeAnimatorController = animators[animatorType];
+            animator.runtimeAnimatorController = (RuntimeAnimatorController)playerManager.values["animator"];
         }
 
 
     }
+ 
 
 
     private void OnDestroy()
     {
-        PlayerPrefs.SetInt("canAttack", canAttack?1:0);
-        PlayerPrefs.SetInt("canDoubleJump", canDoubleJump?1:0);
-        PlayerPrefs.SetInt("animatorType", animatorType);
+        Debug.Log("saving");
+        playerManager.values["canAttack"] = canAttack;
+        playerManager.values["canDoubleJump"] = canDoubleJump;
+        playerManager.values["animator"] = animator.runtimeAnimatorController;
 
     }
     private void Update()
@@ -144,22 +148,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!context.performed) return;
         //je¿eli player ma domyœln¹ wersje bez broni
-        if (animatorType == 0)
+        if (animator.runtimeAnimatorController == animatorBasic)
         {
             //zmieñ na wersjê z broni¹
-            animator.runtimeAnimatorController = animators[1];
-            animatorType = 1;
+            animator.runtimeAnimatorController = animatorWithSword;
             canAttack = true; // jak ma broñ to mo¿e atakowaæ
         }
         else
         {
             //i na odwrót
-            animator.runtimeAnimatorController = animators[0];
-            animatorType = 0;
-            canAttack = false; 
+            animator.runtimeAnimatorController = animatorBasic;
+            canAttack = false;
         }
     }
-    
+
     public void attack(InputAction.CallbackContext context)
     {
         if (!canAttack) return;

@@ -339,9 +339,8 @@ MonoBehaviour:
     m_Bits: 65664
   swordAttackCooldown: 0.75
   attackDamageTime: 0.15
-  animators:
-  - {fileID: 9100000, guid: d206ace0f167a124bb4586dab70ae688, type: 2}
-  - {fileID: 22100000, guid: 06c350eb144f3fe4e943a68b58c30a3a, type: 2}
+  animatorBasic: {fileID: 9100000, guid: d206ace0f167a124bb4586dab70ae688, type: 2}
+  animatorWithSword: {fileID: 22100000, guid: 06c350eb144f3fe4e943a68b58c30a3a, type: 2}
   attackGroundTransform: {fileID: 7365333342704596797}
   attackAirTransform: {fileID: 928561594084352487}
   attackGroundRange: 0.74

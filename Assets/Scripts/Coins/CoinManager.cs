@@ -7,6 +7,7 @@ public class CoinManager : MonoBehaviour
 {
     public static CoinManager instance;
 
+    PlayerManager playerManager;
     private int coins;
     [SerializeField] Text coinText;
 
@@ -17,21 +18,22 @@ public class CoinManager : MonoBehaviour
     }
     public void Awake()
     {
+        if (playerManager == null) playerManager = PlayerManager.getInstance();
         instance = this;
     }
 
     public void Start()
     {
         coins = 0;
-        if (PlayerPrefs.HasKey("coins"))
+        if (playerManager.values.ContainsKey("coins"))
         {
-            coins = PlayerPrefs.GetInt("coins");
+            coins = (int)playerManager.values["coins"];
         }
         UpdateHUD();
     }
     private void OnDestroy()
     {
-        PlayerPrefs.SetInt("coins", coins);
+        playerManager.values["coins"] = coins;
     }
 
     private void UpdateHUD() 
