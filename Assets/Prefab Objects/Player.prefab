@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5dac959e004b964c82bec98295a60d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDoubleJump: 0
   jumpHeight: 7
   moveSpeed: 7
   feet: {fileID: 7393292959119918922}
@@ -338,8 +339,9 @@ MonoBehaviour:
     m_Bits: 65664
   swordAttackCooldown: 0.75
   attackDamageTime: 0.15
-  animatorBasic: {fileID: 9100000, guid: d206ace0f167a124bb4586dab70ae688, type: 2}
-  animatorWithSword: {fileID: 22100000, guid: 06c350eb144f3fe4e943a68b58c30a3a, type: 2}
+  animators:
+  - {fileID: 9100000, guid: d206ace0f167a124bb4586dab70ae688, type: 2}
+  - {fileID: 22100000, guid: 06c350eb144f3fe4e943a68b58c30a3a, type: 2}
   attackGroundTransform: {fileID: 7365333342704596797}
   attackAirTransform: {fileID: 928561594084352487}
   attackGroundRange: 0.74
@@ -383,6 +385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   health: 0
+  respawnTime: 3
 --- !u!114 &5576008395377780337
 MonoBehaviour:
   m_ObjectHideFlags: 0

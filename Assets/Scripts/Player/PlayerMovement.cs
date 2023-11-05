@@ -16,8 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float attackDamageTime = .5f;
 
 
-    [SerializeField] private RuntimeAnimatorController animatorBasic;
-    [SerializeField] private RuntimeAnimatorController animatorWithSword;
+    [SerializeField] private RuntimeAnimatorController[] animators;
     [SerializeField] private Transform attackGroundTransform;
     [SerializeField] private Transform attackAirTransform;
     [SerializeField] private float attackGroundRange = 1;
@@ -42,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     private int sworAirAnimationType = 0;
     private float swordAttackCooldownLeft = 0;
     private float attackDamageTimeLeft = 0;
+    private int animatorType = 0;
 
     // odpowaiada za zmianê aktualnej animacji
     private enum MovementState { idle, running, jumping, falling, doubleJump, swordAttack_1, swordAttack_2, swordAttack_3, swordAirAttack_1, swordAirAttack_2, swordThrow};
@@ -55,12 +55,35 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = false;
         hasDoubleJumped = true;
         hasJumped = false;
+
         canAttack = true;
         canDoubleJump = false;
+
+        if (PlayerPrefs.HasKey("canAttack"))
+        {
+            canAttack = PlayerPrefs.GetInt("canAttack") != 0;
+        }
+        if (PlayerPrefs.HasKey("canDoubleJump"))
+        {
+            canDoubleJump = PlayerPrefs.GetInt("canDoubleJump") != 0;
+        }
+        if (PlayerPrefs.HasKey("animatorType"))
+        {
+            animatorType = PlayerPrefs.GetInt("animatorType");
+            animator.runtimeAnimatorController = animators[animatorType];
+        }
+
+
     }
 
 
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetInt("canAttack", canAttack?1:0);
+        PlayerPrefs.SetInt("canDoubleJump", canDoubleJump?1:0);
+        PlayerPrefs.SetInt("animatorType", animatorType);
 
+    }
     private void Update()
     {
         
@@ -121,16 +144,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!context.performed) return;
         //je¿eli player ma domyœln¹ wersje bez broni
-        if (animator.runtimeAnimatorController == animatorBasic)
+        if (animatorType == 0)
         {
             //zmieñ na wersjê z broni¹
-            animator.runtimeAnimatorController = animatorWithSword;
+            animator.runtimeAnimatorController = animators[1];
+            animatorType = 1;
             canAttack = true; // jak ma broñ to mo¿e atakowaæ
         }
         else
         {
             //i na odwrót
-            animator.runtimeAnimatorController = animatorBasic;
+            animator.runtimeAnimatorController = animators[0];
+            animatorType = 0;
             canAttack = false; 
         }
     }

@@ -23,7 +23,15 @@ public class CoinManager : MonoBehaviour
     public void Start()
     {
         coins = 0;
+        if (PlayerPrefs.HasKey("coins"))
+        {
+            coins = PlayerPrefs.GetInt("coins");
+        }
         UpdateHUD();
+    }
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetInt("coins", coins);
     }
 
     private void UpdateHUD() 

@@ -23,9 +23,16 @@ public class PlayerHealth : MonoBehaviour
     {
         health = maxHealth;
         animator = GetComponent<Animator>();
+        if (PlayerPrefs.HasKey("health"))
+        {
+            health = PlayerPrefs.GetInt("health");
+        }
     }
-
-   private void Update()
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetInt("health", health);
+    }
+    private void Update()
     {
         if (health <= 0)
         {
