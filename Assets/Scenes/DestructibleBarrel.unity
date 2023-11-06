@@ -7720,6 +7720,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DestructibleBarrel
       objectReference: {fileID: 0}
+    - target: {fileID: 7632126457117313632, guid: 1ebbd7137ae259f47919ff4aadff1188, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4e256de7e29dccf438158750b0876cda, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
