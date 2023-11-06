@@ -5,6 +5,7 @@ using UnityEngine;
 public class CannonBall : MonoBehaviour
 {
 
+    [SerializeField] private int despawnAfter = 10;
     public float speed = 10f;
     public int damage = 10;
     private Animator animator;
@@ -16,6 +17,7 @@ public class CannonBall : MonoBehaviour
         animator = GetComponent<Animator>();
 
         rb.velocity = transform.right * speed;
+        StartCoroutine(destroyAfter());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -52,6 +54,12 @@ public class CannonBall : MonoBehaviour
         rb.rotation = 270;
         rb.velocity = Vector2.zero;
         animator.SetTrigger("Explosion");
+    }
+
+    IEnumerator destroyAfter()
+    {
+        yield return new WaitForSeconds(despawnAfter);
+        Explode();
     }
 }
 
