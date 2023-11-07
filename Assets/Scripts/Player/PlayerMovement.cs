@@ -159,18 +159,27 @@ public class PlayerMovement : MonoBehaviour
         attackDamageTimeLeft = attackDamageTime;
         //lista ude¿onych obiektów by nic 2 razy nie ude¿yæ
         List<HealthSystem> damaged = new List<HealthSystem>();
+        Dictionary<int, DestructibleBox> destructibles = new Dictionary<int, DestructibleBox>();
         while (attackDamageTimeLeft > 0)
         {
             //pobiera wszystkich attackable z okrêgu dooko³a miecza
             hits = Physics2D.CircleCastAll(transform.position, range, transform.right, 0f, attackableLayer);
             for (int i = 0; i < hits.Length; i++)
             {
-                HealthSystem healthSystem = hits[i].collider.GetComponent<HealthSystem>();
-                //zadaje im dmg
-                if (healthSystem != null && !healthSystem.isDamaged)
+                // sprawdza czy uderzyliśmy jakiś destructible i dodaje do słownika jeżeli jeszcze go tam nie ma
+                if (hits[i].collider.gameObject.CompareTag("Destructible") && !destructibles.ContainsKey(hits[i].collider.gameObject.GetHashCode()))
                 {
-                    damaged.Add(healthSystem);
-                    healthSystem.takeDamage(attackDamage);
+                    destructibles.Add(hits[i].collider.gameObject.GetHashCode(), hits[i].collider.GetComponent<DestructibleBox>());
+                }
+                else
+                {
+                    HealthSystem healthSystem = hits[i].collider.GetComponent<HealthSystem>();
+                    //zadaje im dmg
+                    if (healthSystem != null && !healthSystem.isDamaged)
+                    {
+                        damaged.Add(healthSystem);
+                        healthSystem.takeDamage(attackDamage);
+                    }
                 }
             }
             yield return null;
@@ -178,6 +187,15 @@ public class PlayerMovement : MonoBehaviour
         foreach(HealthSystem hs in damaged)
         {
             hs.isDamaged = false;
+        }
+        
+        // jeżeli uderzyliśmy jakieś przedmioty, które się rozpadają
+        if (destructibles.Count > 0)
+        {
+            foreach (KeyValuePair<int, DestructibleBox> destr in destructibles)
+            {
+                destr.Value.GetHit();
+            }
         }
     }
 
@@ -233,5 +251,5 @@ public class PlayerMovement : MonoBehaviour
         if(animator.GetInteger("State") != (int)state)
             animator.SetInteger("State", (int)state);
     }
-
+    
 }
