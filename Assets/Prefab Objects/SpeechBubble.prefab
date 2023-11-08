@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 1801899735528898946}
   - component: {fileID: 8769105903648858492}
   - component: {fileID: 4954754113649100182}
+  - component: {fileID: 723356321729887544}
   m_Layer: 0
   m_Name: SpeechBubble
   m_TagString: Untagged
@@ -103,16 +104,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &2534516697690754862
-Transform:
+--- !u!224 &2534516697690754862
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2211992864398246770}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.519, y: -2.783, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.075208664}
   m_LocalScale: {x: 11.620263, y: 3.3680573, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -120,6 +120,11 @@ Transform:
   - {fileID: 7482252157772813274}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1.7367928, y: -1.1062971}
+  m_SizeDelta: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.56666666, y: 0.0138888955}
 --- !u!212 &1801899735528898946
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -212,6 +217,26 @@ MonoBehaviour:
   - Would you like to buy some diamonds?
   continueButton: {fileID: 8365005974944865435}
   hostEntity: {fileID: 0}
+--- !u!114 &723356321729887544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2211992864398246770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 0
+  m_MinHeight: 0
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &3024531174362371894
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +408,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.0058, y: 0.3409}
+  m_AnchoredPosition: {x: -0.005800009, y: 0.3409}
   m_SizeDelta: {x: 5.33353, y: 2.3952}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2142912527851529905
