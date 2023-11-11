@@ -1521,6 +1521,14 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1806344466653189145, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806344466653189145, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2631924698457790205, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1562,6 +1570,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3385596900798164727, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3385596900798164727, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
       propertyPath: jumpHeight
       value: 12
       objectReference: {fileID: 0}
@@ -1569,9 +1581,29 @@ PrefabInstance:
       propertyPath: canDoubleJump
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5576008395377780337, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090264685849116960, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731825485125302672, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6809701430113029805, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165373042807088158, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7359166512555260309, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
