@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
   m_Name: Front palm tree top
   m_EditorClassIdentifier: 
-  m_AnimatedSprites: []
+  m_AnimatedSprites:
+  - {fileID: 21300000, guid: 1cc8e9a858f5f2b469e7b02bbb203347, type: 3}
+  - {fileID: 21300000, guid: c2bcb99b6ded92340af8c3b5cda8497f, type: 3}
+  - {fileID: 21300000, guid: 2655d051dceb452458ff27fc3746156a, type: 3}
+  - {fileID: 21300000, guid: a51ce71dbbaebd2418199c3b41ac09dc, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0

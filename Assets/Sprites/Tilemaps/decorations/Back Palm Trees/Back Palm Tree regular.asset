@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Back Palm Tree regular
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 21300000, guid: 97cf8b0490e853247b281374f74261e5, type: 3}
-  - {fileID: 21300000, guid: 4f012bd3902042144863a2797d0b0984, type: 3}
-  - {fileID: 21300000, guid: ec54a7300a25f4d4eb97a9313d170a8e, type: 3}
-  - {fileID: 21300000, guid: 774afcddfd8c47349b8e300ec0954391, type: 3}
+  - {fileID: 21300000, guid: 328d26caff6329a459ea4399f620cc5f, type: 3}
+  - {fileID: 21300000, guid: b58cd4bcb123def4c8bf42a563d2cffb, type: 3}
+  - {fileID: 21300000, guid: 999ca0ac0f50b364ea0da1ceef958b50, type: 3}
+  - {fileID: 21300000, guid: 59f9fb5141c91ca47a4a07ca8039874f, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0
