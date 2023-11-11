@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] public bool canDoubleJump;
-    [SerializeField] private float jumpHeight = 7f;
+    [SerializeField] public float jumpHeight = 7f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private Transform feet;
     [SerializeField] private LayerMask groundLayer;
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     private RaycastHit2D[] hits;
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Animator animator;
     private float axisR;
 
