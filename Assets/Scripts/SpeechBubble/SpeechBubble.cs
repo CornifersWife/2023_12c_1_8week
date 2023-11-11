@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class SpeechBubble : MonoBehaviour
 {
@@ -25,14 +26,15 @@ public class SpeechBubble : MonoBehaviour
     {
         canvas = gameObject.transform.parent.gameObject.transform.parent.gameObject;
         container = gameObject.transform.parent.gameObject;
-        rt = container.GetComponent<RectTransform>();
+        rt = canvas.GetComponent<RectTransform>();
         animator = container.GetComponent<Animator>();
     }
     
-    private void Update()
+    private void Start()
     {
+        //zmiana pozycji na pozycję nad host entity
         Transform t = hostEntity.transform;
-        Vector2 newPosition = new Vector2(t.position.x, t.position.y + 2.5f);
+        Vector2 newPosition = new Vector2(t.position.x, t.position.y + 2f);
         rt.anchoredPosition = newPosition;
     }
 
@@ -57,7 +59,7 @@ public class SpeechBubble : MonoBehaviour
         animator.SetTrigger("CloseBubble");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         if (finished)
-            Destroy(gameObject);
+            Destroy(gameObject.transform.parent.gameObject);
     }
 
     private IEnumerator TypeDialogue()

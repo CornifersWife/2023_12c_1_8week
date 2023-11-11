@@ -5,16 +5,15 @@ using UnityEngine;
 
 public class SpeechTrigger : MonoBehaviour
 {
-    [SerializeField] private SpeechBubble speechBubble;
+    [SerializeField] private ContainerActivate container;
     private bool trigerred;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (speechBubble != null)
+        if (container != null)
         {
             if (other.CompareTag("Player") && !trigerred)
             {
-                speechBubble.Activate(true);
-                speechBubble.TriggerStartDialogue();
+                container.Activate();
                 trigerred = true;
             }
         }
@@ -22,11 +21,11 @@ public class SpeechTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (speechBubble != null)
+        if (container != null)
         {
             if (other.CompareTag("Player") && trigerred)
             {
-                speechBubble.Activate(false);
+                container.Deactivate();
                 trigerred = false;
             }
         }
