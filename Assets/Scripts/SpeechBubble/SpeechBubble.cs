@@ -17,17 +17,23 @@ public class SpeechBubble : MonoBehaviour
     private int index;
     private bool finished;
     private Animator animator;
+    private RectTransform rt;
+    private GameObject canvas;
+    private GameObject container;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        canvas = gameObject.transform.parent.gameObject.transform.parent.gameObject;
+        container = gameObject.transform.parent.gameObject;
+        rt = container.GetComponent<RectTransform>();
+        animator = container.GetComponent<Animator>();
     }
-
+    
     private void Update()
     {
         Transform t = hostEntity.transform;
-        Vector3 newPosition = new Vector3(t.position.x, t.position.y + 1.5f, t.position.z);
-        transform.position = newPosition;
+        Vector2 newPosition = new Vector2(t.position.x, t.position.y + 2.5f);
+        rt.anchoredPosition = newPosition;
     }
 
     public void TriggerStartDialogue()
