@@ -207,12 +207,19 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
-                    HealthSystem healthSystem = hits[i].collider.GetComponent<HealthSystem>();
-                    //zadaje im dmg
-                    if (healthSystem != null && !healthSystem.isDamaged)
+                    if (hits[i].collider.name == "Chain")
                     {
-                        damaged.Add(healthSystem);
-                        healthSystem.takeDamage(attackDamage);
+                        Destroy(hits[i].collider.gameObject);
+                    }
+                    else
+                    {
+                        HealthSystem healthSystem = hits[i].collider.GetComponent<HealthSystem>();
+                        //zadaje im dmg
+                        if (healthSystem != null && !healthSystem.isDamaged)
+                        {
+                            damaged.Add(healthSystem);
+                            healthSystem.takeDamage(attackDamage);
+                        }
                     }
                 }
             }
