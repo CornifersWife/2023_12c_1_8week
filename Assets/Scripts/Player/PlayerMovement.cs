@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] public bool canDoubleJump;
     [SerializeField] private float jumpHeight = 7f;
+    [SerializeField] private float jumpDuration = 0.5f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private Transform feet;
     [SerializeField] private LayerMask groundLayer;
@@ -24,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float attackAirRange = 1;
     [SerializeField] private int attackDamage = 2;
     [SerializeField] private LayerMask attackableLayer;
+
+    private float jumpTime = 0f;
+    private bool isJumpingHigher = false;
 
     private RaycastHit2D[] hits;
 
@@ -42,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     private int sworAirAnimationType = 0;
     private float swordAttackCooldownLeft = 0;
     private float attackDamageTimeLeft = 0;
+    private bool isJumping;
 
     // odpowaiada za zmianê aktualnej animacji
     private enum MovementState { idle, running, jumping, falling, doubleJump, swordAttack_1, swordAttack_2, swordAttack_3, swordAirAttack_1, swordAirAttack_2, swordThrow};
@@ -74,8 +79,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.runtimeAnimatorController = (RuntimeAnimatorController)playerManager.values["animator"];
         }
-
-
+        isJumping = false;
     }
  
 
@@ -89,8 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
     private void Update()
-    {
-        
+    { 
         axisR = Input.GetAxisRaw("Horizontal");
         //sprawddza czy stopy dotykaj¹ ziemi (potrzebne do double jump)
         checkGrounded();
@@ -112,20 +115,49 @@ public class PlayerMovement : MonoBehaviour
             hasJumped = false;
         }
 
+        if (isJumping)
+        {
+            jumpTime += Time.fixedDeltaTime;
+
+            if (jumpTime < jumpDuration && isJumpingHigher)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+            }
+            else
+            {
+                jumpTime = 0;
+                isJumping = false;
+            }
+        }
+
     }
 
     //wywo³ywane przez inputManager gdy player ma skoczyæ
     public void jump(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
+        if (context.started)
+        {
+            isJumpingHigher = true;
+            return;
+        }
+        if (context.canceled)
+        {
+            isJumpingHigher = false;
+            return;
+        }
+
         if (hasJumped) return;
         if (isGrounded)
         {
+            isJumping = true;
             hasJumped = true;
+            isJumpingHigher = true;
             return;
         }
         if (!hasDoubleJumped && canDoubleJump)
         {
+            isJumping = true;
+            isJumpingHigher = true;
             hasDoubleJumped = true;
             hasJumped = true;
         }
@@ -186,18 +218,34 @@ public class PlayerMovement : MonoBehaviour
         attackDamageTimeLeft = attackDamageTime;
         //lista ude¿onych obiektów by nic 2 razy nie ude¿yæ
         List<HealthSystem> damaged = new List<HealthSystem>();
+        Dictionary<int, DestructibleBox> destructibles = new Dictionary<int, DestructibleBox>();
         while (attackDamageTimeLeft > 0)
         {
             //pobiera wszystkich attackable z okrêgu dooko³a miecza
             hits = Physics2D.CircleCastAll(transform.position, range, transform.right, 0f, attackableLayer);
             for (int i = 0; i < hits.Length; i++)
             {
-                HealthSystem healthSystem = hits[i].collider.GetComponent<HealthSystem>();
-                //zadaje im dmg
-                if (healthSystem != null && !healthSystem.isDamaged)
+                // sprawdza czy uderzyliśmy jakiś destructible i dodaje do słownika jeżeli jeszcze go tam nie ma
+                if (hits[i].collider.gameObject.CompareTag("Destructible") && !destructibles.ContainsKey(hits[i].collider.gameObject.GetHashCode()))
                 {
-                    damaged.Add(healthSystem);
-                    healthSystem.takeDamage(attackDamage);
+                    destructibles.Add(hits[i].collider.gameObject.GetHashCode(), hits[i].collider.GetComponent<DestructibleBox>());
+                }
+                else
+                {
+                    if (hits[i].collider.name == "Chain")
+                    {
+                        Destroy(hits[i].collider.gameObject);
+                    }
+                    else
+                    {
+                        HealthSystem healthSystem = hits[i].collider.GetComponent<HealthSystem>();
+                        //zadaje im dmg
+                        if (healthSystem != null && !healthSystem.isDamaged)
+                        {
+                            damaged.Add(healthSystem);
+                            healthSystem.takeDamage(attackDamage);
+                        }
+                    }
                 }
             }
             yield return null;
@@ -205,6 +253,15 @@ public class PlayerMovement : MonoBehaviour
         foreach(HealthSystem hs in damaged)
         {
             hs.isDamaged = false;
+        }
+        
+        // jeżeli uderzyliśmy jakieś przedmioty, które się rozpadają
+        if (destructibles.Count > 0)
+        {
+            foreach (KeyValuePair<int, DestructibleBox> destr in destructibles)
+            {
+                destr.Value.GetHit();
+            }
         }
     }
 
@@ -260,5 +317,5 @@ public class PlayerMovement : MonoBehaviour
         if(animator.GetInteger("State") != (int)state)
             animator.SetInteger("State", (int)state);
     }
-
+    
 }

@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Enemy
   - Barrel
+  - Destructible
   layers:
   - Default
   - TransparentFX
@@ -50,4 +51,7 @@ TagManager:
     locked: 0
   - name: Terrain
     uniqueID: 2265949993
+    locked: 0
+  - name: Foreground
+    uniqueID: 2286633783
     locked: 0
