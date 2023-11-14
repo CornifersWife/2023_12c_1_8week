@@ -1376,6 +1376,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 591330316137573892, guid: d7dedc4fb4b20e9408f3d46b748be55f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 805280981922523257, guid: d7dedc4fb4b20e9408f3d46b748be55f, type: 3}
       propertyPath: m_Name
       value: Camera Room (3)
@@ -1384,6 +1388,18 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 956873345}
+    - target: {fileID: 2659985000919567444, guid: d7dedc4fb4b20e9408f3d46b748be55f, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 6.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7669886137056232023, guid: d7dedc4fb4b20e9408f3d46b748be55f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.30078673
+      objectReference: {fileID: 0}
+    - target: {fileID: 7669886137056232023, guid: d7dedc4fb4b20e9408f3d46b748be55f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.2567034
+      objectReference: {fileID: 0}
     - target: {fileID: 8128559864020586026, guid: d7dedc4fb4b20e9408f3d46b748be55f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.30078673
@@ -8654,7 +8670,7 @@ Camera:
   far clip plane: 5000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.52
+  orthographic size: 6.4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -8679,7 +8695,7 @@ Transform:
   m_GameObject: {fileID: 1439489309}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 56.65354, y: -11.480696, z: -10}
+  m_LocalPosition: {x: 0, y: 1.3056, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
