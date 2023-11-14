@@ -52,21 +52,46 @@ public class PlayerMovement : MonoBehaviour
     private enum MovementState { idle, running, jumping, falling, doubleJump, swordAttack_1, swordAttack_2, swordAttack_3, swordAirAttack_1, swordAirAttack_2, swordThrow};
 
     
+    PlayerManager playerManager;
     
     void Awake()
     {
+        if (playerManager == null) playerManager = PlayerManager.getInstance();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         isGrounded = false;
         hasDoubleJumped = true;
         hasJumped = false;
+
         canAttack = true;
         canDoubleJump = false;
+        Debug.Log(playerManager == null);
+        if (playerManager.values.ContainsKey("canAttack"))
+        {
+            canAttack = (bool)playerManager.values["canAttack"];
+        }
+        if (playerManager.values.ContainsKey("canDoubleJump"))
+        {
+            Debug.Log("Loaded jump");
+            canDoubleJump = (bool)playerManager.values["canDoubleJump"];
+        }
+        if (playerManager.values.ContainsKey("animator"))
+        {
+            animator.runtimeAnimatorController = (RuntimeAnimatorController)playerManager.values["animator"];
+        }
         isJumping = false;
     }
+ 
 
 
+    private void OnDestroy()
+    {
+        Debug.Log("saving");
+        playerManager.values["canAttack"] = canAttack;
+        playerManager.values["canDoubleJump"] = canDoubleJump;
+        playerManager.values["animator"] = animator.runtimeAnimatorController;
 
+    }
     private void Update()
     { 
         axisR = Input.GetAxisRaw("Horizontal");
@@ -165,10 +190,10 @@ public class PlayerMovement : MonoBehaviour
         {
             //i na odwrót
             animator.runtimeAnimatorController = animatorBasic;
-            canAttack = false; 
+            canAttack = false;
         }
     }
-    
+
     public void attack(InputAction.CallbackContext context)
     {
         if (!canAttack) return;
