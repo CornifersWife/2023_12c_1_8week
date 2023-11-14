@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] public bool canDoubleJump;
     [SerializeField] public float jumpHeight = 7f;
+    [SerializeField] private float jumpDuration = 0.5f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private Transform feet;
     [SerializeField] private LayerMask groundLayer;
@@ -24,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float attackAirRange = 1;
     [SerializeField] private int attackDamage = 2;
     [SerializeField] private LayerMask attackableLayer;
+
+    private float jumpTime = 0f;
+    private bool isJumpingHigher = false;
 
     private RaycastHit2D[] hits;
 
@@ -42,28 +46,54 @@ public class PlayerMovement : MonoBehaviour
     private int sworAirAnimationType = 0;
     private float swordAttackCooldownLeft = 0;
     private float attackDamageTimeLeft = 0;
+    private bool isJumping;
 
     // odpowaiada za zmianê aktualnej animacji
     private enum MovementState { idle, running, jumping, falling, doubleJump, swordAttack_1, swordAttack_2, swordAttack_3, swordAirAttack_1, swordAirAttack_2, swordThrow};
 
     
+    PlayerManager playerManager;
     
     void Awake()
     {
+        if (playerManager == null) playerManager = PlayerManager.getInstance();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         isGrounded = false;
         hasDoubleJumped = true;
         hasJumped = false;
+
         canAttack = true;
         canDoubleJump = false;
+        Debug.Log(playerManager == null);
+        if (playerManager.values.ContainsKey("canAttack"))
+        {
+            canAttack = (bool)playerManager.values["canAttack"];
+        }
+        if (playerManager.values.ContainsKey("canDoubleJump"))
+        {
+            Debug.Log("Loaded jump");
+            canDoubleJump = (bool)playerManager.values["canDoubleJump"];
+        }
+        if (playerManager.values.ContainsKey("animator"))
+        {
+            animator.runtimeAnimatorController = (RuntimeAnimatorController)playerManager.values["animator"];
+        }
+        isJumping = false;
     }
+ 
 
 
-
-    private void Update()
+    private void OnDestroy()
     {
-        
+        Debug.Log("saving");
+        playerManager.values["canAttack"] = canAttack;
+        playerManager.values["canDoubleJump"] = canDoubleJump;
+        playerManager.values["animator"] = animator.runtimeAnimatorController;
+
+    }
+    private void Update()
+    { 
         axisR = Input.GetAxisRaw("Horizontal");
         //sprawddza czy stopy dotykaj¹ ziemi (potrzebne do double jump)
         checkGrounded();
@@ -85,20 +115,49 @@ public class PlayerMovement : MonoBehaviour
             hasJumped = false;
         }
 
+        if (isJumping)
+        {
+            jumpTime += Time.fixedDeltaTime;
+
+            if (jumpTime < jumpDuration && isJumpingHigher)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+            }
+            else
+            {
+                jumpTime = 0;
+                isJumping = false;
+            }
+        }
+
     }
 
     //wywo³ywane przez inputManager gdy player ma skoczyæ
     public void jump(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
+        if (context.started)
+        {
+            isJumpingHigher = true;
+            return;
+        }
+        if (context.canceled)
+        {
+            isJumpingHigher = false;
+            return;
+        }
+
         if (hasJumped) return;
         if (isGrounded)
         {
+            isJumping = true;
             hasJumped = true;
+            isJumpingHigher = true;
             return;
         }
         if (!hasDoubleJumped && canDoubleJump)
         {
+            isJumping = true;
+            isJumpingHigher = true;
             hasDoubleJumped = true;
             hasJumped = true;
         }
@@ -131,10 +190,10 @@ public class PlayerMovement : MonoBehaviour
         {
             //i na odwrót
             animator.runtimeAnimatorController = animatorBasic;
-            canAttack = false; 
+            canAttack = false;
         }
     }
-    
+
     public void attack(InputAction.CallbackContext context)
     {
         if (!canAttack) return;
@@ -173,12 +232,19 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
-                    HealthSystem healthSystem = hits[i].collider.GetComponent<HealthSystem>();
-                    //zadaje im dmg
-                    if (healthSystem != null && !healthSystem.isDamaged)
+                    if (hits[i].collider.name == "Chain")
                     {
-                        damaged.Add(healthSystem);
-                        healthSystem.takeDamage(attackDamage);
+                        Destroy(hits[i].collider.gameObject);
+                    }
+                    else
+                    {
+                        HealthSystem healthSystem = hits[i].collider.GetComponent<HealthSystem>();
+                        //zadaje im dmg
+                        if (healthSystem != null && !healthSystem.isDamaged)
+                        {
+                            damaged.Add(healthSystem);
+                            healthSystem.takeDamage(attackDamage);
+                        }
                     }
                 }
             }

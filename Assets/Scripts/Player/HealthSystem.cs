@@ -13,9 +13,10 @@ public class PlayerHealth : MonoBehaviour
     private PlayerMovement playerMovement;
     [SerializeField] private float respawnTime = 3;
     private float timer = 0;
-
+    PlayerManager playerManager;
     private void Awake()
     {
+        if (playerManager == null) playerManager = PlayerManager.getInstance();
         playerMovement = GetComponent<PlayerMovement>();
     }
     
@@ -23,9 +24,16 @@ public class PlayerHealth : MonoBehaviour
     {
         health = maxHealth;
         animator = GetComponent<Animator>();
+        if (playerManager.values.ContainsKey("health"))
+        {
+            health = (int)playerManager.values["health"];
+        }
     }
-
-   private void Update()
+    private void OnDestroy()
+    {
+       playerManager.values["health"] = health;
+    }
+    private void Update()
     {
         if (health <= 0)
         {
