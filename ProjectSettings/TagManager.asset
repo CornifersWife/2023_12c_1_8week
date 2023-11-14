@@ -18,7 +18,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
+  - Decorations
   - 
   - Collectible
   - 
@@ -57,4 +57,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 2286633783
+    locked: 0
+  - name: ui
+    uniqueID: 391090613
     locked: 0
