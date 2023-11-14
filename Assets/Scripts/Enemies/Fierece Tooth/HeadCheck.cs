@@ -11,6 +11,8 @@ public class HeadCheck : MonoBehaviour
         if (collision.GetComponent<Feet>())
         {
             healthSystem.takeDamage(damageOnHeadCollision);
+            PlayerMovement pm = collision.GetComponentInParent<PlayerMovement>();
+            pm.rb.velocity = new Vector2 (pm.rb.velocity.x, pm.jumpHeight);
         } 
     }
 }
