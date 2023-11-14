@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] public bool canDoubleJump;
     [SerializeField] private float jumpHeight = 7f;
+    [SerializeField] private float jumpDuration = 0.5f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private Transform feet;
     [SerializeField] private LayerMask groundLayer;
@@ -24,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float attackAirRange = 1;
     [SerializeField] private int attackDamage = 2;
     [SerializeField] private LayerMask attackableLayer;
+
+    private float jumpTime = 0f;
+    private bool isJumpingHigher = false;
 
     private RaycastHit2D[] hits;
 
@@ -42,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     private int sworAirAnimationType = 0;
     private float swordAttackCooldownLeft = 0;
     private float attackDamageTimeLeft = 0;
+    private bool isJumping;
 
     // odpowaiada za zmianê aktualnej animacji
     private enum MovementState { idle, running, jumping, falling, doubleJump, swordAttack_1, swordAttack_2, swordAttack_3, swordAirAttack_1, swordAirAttack_2, swordThrow};
@@ -57,13 +62,13 @@ public class PlayerMovement : MonoBehaviour
         hasJumped = false;
         canAttack = true;
         canDoubleJump = false;
+        isJumping = false;
     }
 
 
 
     private void Update()
-    {
-        
+    { 
         axisR = Input.GetAxisRaw("Horizontal");
         //sprawddza czy stopy dotykaj¹ ziemi (potrzebne do double jump)
         checkGrounded();
@@ -85,20 +90,49 @@ public class PlayerMovement : MonoBehaviour
             hasJumped = false;
         }
 
+        if (isJumping)
+        {
+            jumpTime += Time.fixedDeltaTime;
+
+            if (jumpTime < jumpDuration && isJumpingHigher)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+            }
+            else
+            {
+                jumpTime = 0;
+                isJumping = false;
+            }
+        }
+
     }
 
     //wywo³ywane przez inputManager gdy player ma skoczyæ
     public void jump(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
+        if (context.started)
+        {
+            isJumpingHigher = true;
+            return;
+        }
+        if (context.canceled)
+        {
+            isJumpingHigher = false;
+            return;
+        }
+
         if (hasJumped) return;
         if (isGrounded)
         {
+            isJumping = true;
             hasJumped = true;
+            isJumpingHigher = true;
             return;
         }
         if (!hasDoubleJumped && canDoubleJump)
         {
+            isJumping = true;
+            isJumpingHigher = true;
             hasDoubleJumped = true;
             hasJumped = true;
         }
