@@ -8,11 +8,13 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _mainView;
     [SerializeField] private GameObject _creditsView;
+    [SerializeField] private GameObject _optionsView;
 
     private void Awake()
     {
         _mainView.SetActive(true);
         _creditsView.SetActive(false);
+        _optionsView.SetActive(false);
     }
 
     #region Main view
@@ -28,7 +30,8 @@ public class MenuManager : MonoBehaviour
 
     public void OptionsClicked() 
     {
-        //TODO
+        _mainView.SetActive(false);
+        _optionsView.SetActive(true);
     }
     public void CreditsClicked() 
     { 
@@ -49,6 +52,7 @@ public class MenuManager : MonoBehaviour
     public void BackClicked() 
     {
         _creditsView.SetActive(false);
+        _optionsView.SetActive(false);
         _mainView.SetActive(true);
     }
     #endregion
