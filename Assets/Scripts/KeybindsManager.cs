@@ -55,7 +55,6 @@ public class KeybindsManager : MonoBehaviour
 
     public void SaveKeys()
     {
-        //TODO czemu sie nie zapisuje?
         foreach (var key in keys)
         {
             PlayerPrefs.SetString(key.Key, key.Value.ToString());
