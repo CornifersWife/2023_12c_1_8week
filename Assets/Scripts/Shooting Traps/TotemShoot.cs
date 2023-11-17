@@ -10,12 +10,15 @@ public class TotemShoot : MonoBehaviour
     [SerializeField] private int _detectionRange;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private bool _showDetection;
+    [SerializeField] private Transform _projectileSpawnPoint;
     private float _detectionDelay = 0.3f;
     private Vector2 _detectionPoint;
     private Vector2 _detectionSize;
+    private Animator _animator;
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         var orientation = (float)(_detectionRange) / 2 + 0.6f;
 
         if (transform.rotation.y == 1) 
@@ -37,8 +40,11 @@ public class TotemShoot : MonoBehaviour
         while (true)
         {
             if (Detect() == true) 
-            { 
-                Instantiate(_projectilePrefab, new Vector2(transform.position.x, transform.position.y - 0.65f), transform.rotation);
+            {
+                _animator.SetTrigger("ShootTrigger");
+                yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
+                yield return new WaitWhile(() => _animator.GetCurrentAnimatorStateInfo(0).IsName("Totem_shoot"));
+                Instantiate(_projectilePrefab, _projectileSpawnPoint.position, _projectileSpawnPoint.rotation);
                 yield return new WaitForSeconds(_shootDelay);
             }
             yield return new WaitForSeconds(_detectionDelay);
