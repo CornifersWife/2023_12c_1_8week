@@ -12,7 +12,7 @@ public class Diamond : Collectible
         {
             enabled = false;
             GetComponent<Animator>().SetBool("Collected", true);
-            CoinManager.instance.AddDiamondValue(_diamondConfig.diamondValue);
+            CollectibleManager.instance.AddDiamondValue(_diamondConfig.diamondValue);
         }
         
     }

@@ -1,9 +1,12 @@
+using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CoinManager : MonoBehaviour
+public class CollectibleManager : MonoBehaviour
 {
-    public static CoinManager instance { get; private set; }
+    public static CollectibleManager instance { get; private set; }
 
     private int coins = 0;
     private int diamonds = 0;
@@ -20,8 +23,12 @@ public class CoinManager : MonoBehaviour
         set { diamonds = value; UpdateHUD(); }
     }
 
-    [SerializeField] private Text coinText;
-    [SerializeField] private Text diamondText;
+    [SerializeField] private TextMeshProUGUI coinText;
+    [SerializeField] private GameObject _uncollectedDiamond;
+    [SerializeField] private GameObject _collectedDiamond;
+    [SerializeField] private GameObject _diamondBox;
+    private List<Transform> _diamondPositions;
+    private List<GameObject> _diamondsActive;
 
     public void Awake()
     {
@@ -32,18 +39,42 @@ public class CoinManager : MonoBehaviour
         else 
         {
             instance = this;
+            _diamondPositions = new List<Transform>();
+            _diamondsActive = new List<GameObject>();
+            Transform[] allChildren = _diamondBox.GetComponentsInChildren<Transform>();
+            foreach (Transform child in allChildren) 
+            { 
+                _diamondPositions.Add(child);
+                Debug.Log(child.ToString());
+            }
+            UpdateHUD();
+
         }
     }
 
     public void Start()
     {
-        UpdateHUD();
+        
     }
 
     private void UpdateHUD() 
     {
-        coinText.text = "Coins: " + coins;
-        diamondText.text = "Diamonds: " + diamonds;
+        coinText.text = coins.ToString();
+        foreach(GameObject o in _diamondsActive){ Destroy(o); }
+        GameObject inst = null;
+        for (int i = 1; i < _diamondPositions.Count; i++) 
+        {
+            if (i <= diamonds)
+            {
+                inst = Instantiate(_collectedDiamond, _diamondPositions[i].position, _diamondPositions[i].rotation, _diamondPositions[0]);
+            }
+            else 
+            {
+                inst = Instantiate(_uncollectedDiamond, _diamondPositions[i].position, _diamondPositions[i].rotation, _diamondPositions[0]);
+            }
+            inst.transform.localScale = _diamondPositions[i].localScale;
+            _diamondsActive.Add(inst);
+        }       
     }
 
     public void AddCoinValue(int value) 
