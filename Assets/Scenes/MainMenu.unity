@@ -7880,6 +7880,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dropdown
       objectReference: {fileID: 0}
+    - target: {fileID: 1629455543089279963, guid: 46e96c344e5b5214fada543df5c193cd, type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3846937801161429648, guid: 46e96c344e5b5214fada543df5c193cd, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
