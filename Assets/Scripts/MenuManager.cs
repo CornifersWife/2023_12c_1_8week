@@ -68,11 +68,6 @@ public class MenuManager : MonoBehaviour
 
     private void LoadGame(SaveData data) 
     {
-        Debug.Log(data.LevelName);
-        Debug.Log(data.Weapon);
-        Debug.Log(data.DoubleJump);
-        Debug.Log(data.CoinCount);
-        Debug.Log(data.DiamondCount);
         SceneManager.LoadScene(data.LevelName);
     }
 

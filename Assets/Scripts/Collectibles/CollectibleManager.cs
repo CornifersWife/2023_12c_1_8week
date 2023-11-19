@@ -75,7 +75,6 @@ public class CollectibleManager : MonoBehaviour
     {
         Coins = data.CoinCount;
         Diamonds = data.DiamondCount;
-        Debug.Log("Load zadziałał poprawnie mordo");
     }
 
     public void Start()
