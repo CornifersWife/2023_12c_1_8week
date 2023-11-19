@@ -8,11 +8,12 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _mainView;
     [SerializeField] private GameObject _creditsView;
-
+    [SerializeField] private GameObject _continueView;
     private void Awake()
     {
         _mainView.SetActive(true);
         _creditsView.SetActive(false);
+        _continueView.SetActive(false);
     }
 
     #region Main view
@@ -21,14 +22,11 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(SceneName);
     }
 
-    public void ContinueClicked() 
-    { 
-        //TODO
-    }
+    
 
     public void OptionsClicked() 
     {
-        //TODO
+        //TODO: Menu opcji
     }
     public void CreditsClicked() 
     { 
@@ -42,6 +40,18 @@ public class MenuManager : MonoBehaviour
         #else
             Application.Quit();
         #endif
+    }
+    #endregion
+
+    #region Continue View
+    public void ContinueClicked()
+    {
+        //TODO: Kontynuuacja zapisu gry
+    }
+
+    public void RemoveClicked() 
+    { 
+        //TODO: Usuwanie zapisu gry
     }
     #endregion
 
