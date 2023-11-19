@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System.IO;
 using UnityEditor;
 #endif
 using UnityEngine;
@@ -13,7 +14,21 @@ public class MenuManager : MonoBehaviour
     {
         _mainView.SetActive(true);
         _creditsView.SetActive(false);
-        _continueView.SetActive(false);
+        
+        EventSystem.SaveEventSystem.OnLoadGame += LoadGame;
+
+        if (File.Exists(Application.dataPath + "/saves/save.suffering"))
+        {
+            _continueView.SetActive(true);
+        }
+        else 
+        {
+            _continueView.SetActive(false);
+        }
+    }
+    private void OnDestroy()
+    {
+        EventSystem.SaveEventSystem.OnLoadGame -= LoadGame;
     }
 
     #region Main view
@@ -46,12 +61,15 @@ public class MenuManager : MonoBehaviour
     #region Continue View
     public void ContinueClicked()
     {
-        //TODO: Kontynuuacja zapisu gry
+        SaveSystem.SimpleSaveSystem.LoadBinary();
     }
 
+    private void LoadGame(SaveData data) { SceneManager.LoadScene(data.LevelName); }
+
     public void RemoveClicked() 
-    { 
-        //TODO: Usuwanie zapisu gry
+    {
+        File.Delete(Application.dataPath + "/saves/save.suffering");
+        _continueView.SetActive(false);
     }
     #endregion
 

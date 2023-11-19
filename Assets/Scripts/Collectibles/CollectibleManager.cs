@@ -10,7 +10,6 @@ public class CollectibleManager : MonoBehaviour
 
     private int coins = 0;
     private int diamonds = 0;
-
     int Coins
     {
 
@@ -49,7 +48,28 @@ public class CollectibleManager : MonoBehaviour
             UpdateCoins();
             UpdateDiamonds();
 
+            EventSystem.SaveEventSystem.OnSaveGame += SaveGame;
+            EventSystem.SaveEventSystem.OnLoadGame += LoadGame;
+
         }
+    }
+
+    private void OnDestroy()
+    {
+        EventSystem.SaveEventSystem.OnSaveGame -= SaveGame;
+        EventSystem.SaveEventSystem.OnLoadGame -= LoadGame;
+    }
+
+    private void SaveGame(SaveData data) 
+    {
+        data.CoinCount = Coins;
+        data.DiamondCount = Diamonds;
+    }
+
+    private void LoadGame(SaveData data)
+    {
+        Coins = data.CoinCount;
+        Diamonds = data.DiamondCount;
     }
 
     public void Start()

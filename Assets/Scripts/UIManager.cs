@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
-    using UnityEditor;
+using System;
+using UnityEditor;
 #endif
 
 using UnityEngine;
@@ -12,13 +13,34 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _exitView;
     [SerializeField] private GameObject _bg;
 
+    private string _sceneName;
+
     private void Awake()
     {
         _bg.SetActive(false);
         _pauseView.SetActive(false);
         _exitView.SetActive(false);
+
+        EventSystem.SaveEventSystem.OnSaveGame += SaveGame;
+        SceneManager.sceneLoaded += Save;
+        
     }
 
+    private void Save(Scene scene, LoadSceneMode notUsed)
+    {
+        if (scene.name != "MainMenu") 
+        {
+            _sceneName = scene.name;
+            SaveSystem.SimpleSaveSystem.SaveBinary();
+        }
+    }
+
+    private void SaveGame(SaveData data) { data.LevelName = _sceneName; }
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= Save;
+        EventSystem.SaveEventSystem.OnSaveGame -= SaveGame;
+    }
     public void PauseGame(InputAction.CallbackContext context)
     {
         if (_pauseView.activeInHierarchy || _exitView.activeInHierarchy)

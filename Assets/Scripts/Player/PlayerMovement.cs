@@ -86,6 +86,9 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         isJumping = false;
+
+        EventSystem.SaveEventSystem.OnSaveGame += SaveGame;
+        EventSystem.SaveEventSystem.OnLoadGame += LoadGame;
     }
 
 
@@ -94,6 +97,9 @@ public class PlayerMovement : MonoBehaviour {
         playerManager.values["canAttack"] = canAttack;
         playerManager.values["canDoubleJump"] = canDoubleJump;
         playerManager.values["animator"] = animator.runtimeAnimatorController;
+
+        EventSystem.SaveEventSystem.OnSaveGame -= SaveGame;
+        EventSystem.SaveEventSystem.OnLoadGame -= LoadGame;
     }
 
     private void Update() {
@@ -283,5 +289,17 @@ public class PlayerMovement : MonoBehaviour {
 
         if (animator.GetInteger("State") != (int)state)
             animator.SetInteger("State", (int)state);
+    }
+
+    private void SaveGame(SaveData data) 
+    {
+        data.DoubleJump = canDoubleJump;
+        data.Weapon = canAttack;
+    }
+
+    private void LoadGame(SaveData data) 
+    { 
+        canDoubleJump = data.DoubleJump;
+        canAttack = data.Weapon;
     }
 }
