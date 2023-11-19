@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7665735123906289950}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.2, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -130,7 +130,7 @@ FixedJoint2D:
   m_BreakAction: 2
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 2}
+  m_ConnectedAnchor: {x: 0, y: 1}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!61 &2907923862098545224
