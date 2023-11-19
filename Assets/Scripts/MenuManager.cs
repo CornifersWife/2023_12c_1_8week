@@ -17,6 +17,7 @@ public class MenuManager : MonoBehaviour
         
         EventSystem.SaveEventSystem.OnLoadGame += LoadGame;
 
+        //Jeśli jest save to pozwalamy wczytać, inaczej ni
         if (File.Exists(Application.dataPath + "/saves/save.suffering"))
         {
             _continueView.SetActive(true);
@@ -61,10 +62,19 @@ public class MenuManager : MonoBehaviour
     #region Continue View
     public void ContinueClicked()
     {
+        //Wywołanie wczytania gry
         SaveSystem.SimpleSaveSystem.LoadBinary();
     }
 
-    private void LoadGame(SaveData data) { SceneManager.LoadScene(data.LevelName); }
+    private void LoadGame(SaveData data) 
+    {
+        Debug.Log(data.LevelName);
+        Debug.Log(data.Weapon);
+        Debug.Log(data.DoubleJump);
+        Debug.Log(data.CoinCount);
+        Debug.Log(data.DiamondCount);
+        SceneManager.LoadScene(data.LevelName);
+    }
 
     public void RemoveClicked() 
     {

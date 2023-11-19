@@ -91,7 +91,6 @@ public class PlayerMovement : MonoBehaviour {
         EventSystem.SaveEventSystem.OnLoadGame += LoadGame;
     }
 
-
     private void OnDestroy() {
         Debug.Log("saving");
         playerManager.values["canAttack"] = canAttack;

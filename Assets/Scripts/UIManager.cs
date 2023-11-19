@@ -13,36 +13,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _exitView;
     [SerializeField] private GameObject _bg;
 
-    private string _sceneName;
-
     private void Awake()
     {
         _bg.SetActive(false);
         _pauseView.SetActive(false);
-        _exitView.SetActive(false);
-
-        EventSystem.SaveEventSystem.OnSaveGame += SaveGame;
-        SceneManager.sceneLoaded += Save;
-        
+        _exitView.SetActive(false);  
     }
 
-    private void Save(Scene scene, LoadSceneMode notUsed)
-    {
-        if (scene.name != "MainMenu") 
-        {
-            _sceneName = scene.name;
-            SaveSystem.SimpleSaveSystem.SaveBinary();
-        }
-    }
-
-    private void SaveGame(SaveData data) { data.LevelName = _sceneName; }
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= Save;
-        EventSystem.SaveEventSystem.OnSaveGame -= SaveGame;
-    }
     public void PauseGame(InputAction.CallbackContext context)
     {
+        //Wywoływane przez input managera, jeśli menu aktywne to je wyłączy, jeśli nie to włączy
+
         if (_pauseView.activeInHierarchy || _exitView.activeInHierarchy)
         {
             ContinueClicked();
@@ -53,6 +34,11 @@ public class UIManager : MonoBehaviour
             _pauseView.SetActive(true);
             Time.timeScale = 0;
         }
+    }
+
+    public void OnLevelWasLoaded(int level)
+    {
+        SaveSystem.SimpleSaveSystem.LoadBinary();
     }
 
     #region PauseMenu

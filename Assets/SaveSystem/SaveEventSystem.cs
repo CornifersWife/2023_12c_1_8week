@@ -3,6 +3,8 @@ namespace EventSystem
 {
     public static class SaveEventSystem
     {
+        //Tajemna magia eventów, nie ruszać bo jeszcze zepsujecie
+
         public static event Action<SaveData> OnSaveGame;
         public static event Action<SaveData> OnLoadGame;
 

@@ -37,9 +37,14 @@ public class CollectibleManager : MonoBehaviour
         }
         else 
         {
+
+            // Zapisujemy instancję dla singletonu
             instance = this;
+
             _diamondPositions = new List<Transform>();
             _diamondsActive = new List<GameObject>();
+
+            //Pobieramy listę pozycji gdzie mają się znajdować diamenciki
             Transform[] allChildren = _diamondBox.GetComponentsInChildren<Transform>();
             foreach (Transform child in allChildren) 
             { 
@@ -70,6 +75,7 @@ public class CollectibleManager : MonoBehaviour
     {
         Coins = data.CoinCount;
         Diamonds = data.DiamondCount;
+        Debug.Log("Load zadziałał poprawnie mordo");
     }
 
     public void Start()
@@ -81,6 +87,7 @@ public class CollectibleManager : MonoBehaviour
 
     private void UpdateDiamonds() 
     {
+        //Wywalamy wszystkie istniejące diamenty i tworzymy na nowo, tyle ile jest aktywnych a reszta niekatywna
         foreach(GameObject o in _diamondsActive){ Destroy(o); }
         GameObject inst = null;
         for (int i = 1; i < _diamondPositions.Count; i++) 
