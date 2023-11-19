@@ -15,12 +15,12 @@ public class CollectibleManager : MonoBehaviour
     {
 
         get { return coins; }
-        set { coins = value; UpdateHUD(); }
+        set { coins = value; UpdateCoins(); }
     }
     int Diamonds
     {
         get { return diamonds; }
-        set { diamonds = value; UpdateHUD(); }
+        set { diamonds = value; UpdateDiamonds(); }
     }
 
     [SerializeField] private TextMeshProUGUI coinText;
@@ -45,9 +45,9 @@ public class CollectibleManager : MonoBehaviour
             foreach (Transform child in allChildren) 
             { 
                 _diamondPositions.Add(child);
-                Debug.Log(child.ToString());
             }
-            UpdateHUD();
+            UpdateCoins();
+            UpdateDiamonds();
 
         }
     }
@@ -57,9 +57,10 @@ public class CollectibleManager : MonoBehaviour
         
     }
 
-    private void UpdateHUD() 
+    private void UpdateCoins() { coinText.text = coins.ToString(); }
+
+    private void UpdateDiamonds() 
     {
-        coinText.text = coins.ToString();
         foreach(GameObject o in _diamondsActive){ Destroy(o); }
         GameObject inst = null;
         for (int i = 1; i < _diamondPositions.Count; i++) 
@@ -80,12 +81,12 @@ public class CollectibleManager : MonoBehaviour
     public void AddCoinValue(int value) 
     {
         coins += value;  
-        UpdateHUD();
+        UpdateCoins();
     }
 
     public void AddDiamondValue(int value) 
     { 
         diamonds += value;
-        UpdateHUD();
+        UpdateDiamonds();
     }
 }
