@@ -21,7 +21,7 @@ TagManager:
   - Decorations
   - 
   - Collectible
-  - 
+  - Projectile
   - 
   - 
   - 
@@ -51,6 +51,9 @@ TagManager:
     locked: 0
   - name: Terrain
     uniqueID: 2265949993
+    locked: 0
+  - name: Projectiles
+    uniqueID: 802118349
     locked: 0
   - name: Dialogue
     uniqueID: 3243664613
