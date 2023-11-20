@@ -8,14 +8,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    bool isOpen = false;
+    public bool isOpen = false;
     [SerializeField] private SceneAsset scene;
-    [SerializeField] private AnimatorController animator;
 
     private void Awake()
     {
         isOpen = false;
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
