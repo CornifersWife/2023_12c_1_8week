@@ -1,8 +1,7 @@
 #if UNITY_EDITOR
-using System;
 using UnityEditor;
 #endif
-
+using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -38,7 +37,10 @@ public class UIManager : MonoBehaviour
 
     public void OnLevelWasLoaded(int level)
     {
-        SaveSystem.SimpleSaveSystem.LoadBinary();
+        if (File.Exists(Application.dataPath + "/saves/save.suffering"))
+        {
+            SaveSystem.SimpleSaveSystem.LoadBinary();
+        }     
     }
 
     #region PauseMenu
