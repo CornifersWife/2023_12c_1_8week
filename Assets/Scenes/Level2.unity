@@ -71369,6 +71369,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 478422728}
     m_Modifications:
+    - target: {fileID: 764209915612275430, guid: f98173d0c1715204994789524920181b, type: 3}
+      propertyPath: _showDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1663304020098167888, guid: f98173d0c1715204994789524920181b, type: 3}
       propertyPath: m_Name
       value: Shooting Totem
@@ -71416,6 +71420,10 @@ PrefabInstance:
     - target: {fileID: 4344470223793262705, guid: f98173d0c1715204994789524920181b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290380510801657706, guid: f98173d0c1715204994789524920181b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -75670,11 +75678,11 @@ PrefabInstance:
       objectReference: {fileID: 29033324}
     - target: {fileID: 6902250644070573256, guid: 6326208260e3b7a48b6efee15302b120, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.6799984
+      value: -4.9699984
       objectReference: {fileID: 0}
     - target: {fileID: 6902250644070573256, guid: 6326208260e3b7a48b6efee15302b120, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4299994
+      value: -1.3699987
       objectReference: {fileID: 0}
     - target: {fileID: 6902250644070573256, guid: 6326208260e3b7a48b6efee15302b120, type: 3}
       propertyPath: m_LocalPosition.z
@@ -80773,6 +80781,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shooting Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 3796485799508557257, guid: f98173d0c1715204994789524920181b, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796485799508557257, guid: f98173d0c1715204994789524920181b, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4344470223793262705, guid: f98173d0c1715204994789524920181b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.3594666
@@ -80833,11 +80849,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2631924698457790205, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.05
+      value: -6.34
       objectReference: {fileID: 0}
     - target: {fileID: 2631924698457790205, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.19
+      value: -1.13
       objectReference: {fileID: 0}
     - target: {fileID: 2631924698457790205, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
       propertyPath: m_LocalPosition.z
