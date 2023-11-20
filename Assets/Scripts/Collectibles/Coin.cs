@@ -9,7 +9,7 @@ public class CoinCollection : Collectible
         if (enabled) {
             enabled = false;
             GetComponent<Animator>().SetBool("Collected", true);
-            CoinManager.instance.AddCoinValue(_coinConfig.coinValue);
+            CollectibleManager.instance.AddCoinValue(_coinConfig.coinValue);
         }
         
     }
