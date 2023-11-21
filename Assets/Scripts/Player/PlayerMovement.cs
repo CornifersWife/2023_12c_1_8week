@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private int attackDamage = 2;
     [SerializeField] private LayerMask attackableLayer;
 
-    private bool isJumpingHigher = false;
 
     private RaycastHit2D[] hits;
 
