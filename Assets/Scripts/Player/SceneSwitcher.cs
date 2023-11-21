@@ -1,13 +1,14 @@
 
-
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.Build.Content;
+#endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    [SerializeField] private SceneAsset scene;
+    [SerializeField] private string SceneName;
 
     private void Awake()
     {
@@ -18,12 +19,12 @@ public class SceneSwitcher : MonoBehaviour
         if(collision != null && collision.name == "Player")
         {
             SaveSystem.SimpleSaveSystem.SaveBinary();
-            SceneManager.LoadScene(scene.name);
+            SceneManager.LoadScene(SceneName);
         }
     }
 
     private void SaveGame(SaveData data) 
     { 
-        data.LevelName = scene.name;
+        data.LevelName = SceneName;
     }
 }

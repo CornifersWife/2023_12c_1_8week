@@ -6,17 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Checkpoint-Revive.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/Scene Switcher.unity
-    guid: 64096d1484b0b184cb27af3d4f491c72
-  - enabled: 1
-    path: Assets/Scenes/TestLevel.unity
-    guid: 5b403f5979411b947bcf57a9fdb9b31d
-  - enabled: 1
-    path: Assets/Scenes/MainMenuWithSettings.unity
-    guid: 56e55d61e6c7e6241b5652bfac8c85c2
+    path: Assets/Scenes/MainMenu.unity
+    guid: e4ebb5084bb213246a6e58f93077e20f
   - enabled: 1
     path: Assets/Scenes/Intro.unity
     guid: fb74c6d72c8db084ea172aae7c548de1
