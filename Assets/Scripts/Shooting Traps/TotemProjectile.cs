@@ -21,9 +21,9 @@ public class TotemProjectile : MonoBehaviour
     {
         if (collision.CompareTag("Player")) 
         {
-            collision.gameObject.GetComponent<PlayerHealth>().takeDamage(100);
-            Destroy(gameObject);
+            collision.gameObject.GetComponent<PlayerHealth>().takeDamage(100);         
         }
+        GetComponent<Animator>().SetTrigger("IsHit");
     }
 
     private void OnTriggerExit2D(Collider2D collision)

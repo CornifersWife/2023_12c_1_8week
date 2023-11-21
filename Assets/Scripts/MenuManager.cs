@@ -8,11 +8,16 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _mainView;
     [SerializeField] private GameObject _creditsView;
-
+    [SerializeField] private GameObject _optionsView;
+    [SerializeField] private GameObject _keybindsView;
+    [SerializeField] private GameObject _continueView;
     private void Awake()
     {
         _mainView.SetActive(true);
         _creditsView.SetActive(false);
+        _optionsView.SetActive(false);
+        _keybindsView.SetActive(false);
+        _continueView.SetActive(false);
     }
 
     #region Main view
@@ -21,14 +26,12 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(SceneName);
     }
 
-    public void ContinueClicked() 
-    { 
-        //TODO
-    }
+    
 
     public void OptionsClicked() 
     {
-        //TODO
+        _mainView.SetActive(false);
+        _optionsView.SetActive(true);
     }
     public void CreditsClicked() 
     { 
@@ -45,11 +48,33 @@ public class MenuManager : MonoBehaviour
     }
     #endregion
 
+    #region Continue View
+    public void ContinueClicked()
+    {
+        //TODO: Kontynuuacja zapisu gry
+    }
+
+    public void RemoveClicked() 
+    { 
+        //TODO: Usuwanie zapisu gry
+    }
+    #endregion
+
     #region Credits View
     public void BackClicked() 
     {
         _creditsView.SetActive(false);
+        _optionsView.SetActive(false);
+        _keybindsView.SetActive(false);
         _mainView.SetActive(true);
+    }
+    #endregion
+    
+    #region Options View
+    public void KBClicked() 
+    {
+        _optionsView.SetActive(false);
+        _keybindsView.SetActive(true);
     }
     #endregion
 }
