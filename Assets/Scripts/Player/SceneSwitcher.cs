@@ -1,18 +1,30 @@
 
-
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.Build.Content;
+#endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    [SerializeField] private SceneAsset scene;
+    [SerializeField] private string SceneName;
+
+    private void Awake()
+    {
+        EventSystem.SaveEventSystem.OnSaveGame += SaveGame;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision != null && collision.name == "Player")
         {
-            SceneManager.LoadScene(scene.name);
+            SaveSystem.SimpleSaveSystem.SaveBinary();
+            SceneManager.LoadScene(SceneName);
         }
+    }
+
+    private void SaveGame(SaveData data) 
+    { 
+        data.LevelName = SceneName;
     }
 }
