@@ -14809,6 +14809,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5576008395377780337, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5576008395377780337, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
+      value: 7a2d5ed5-145a-4112-9db0-70a3387dc6aa
+      objectReference: {fileID: 0}
+    - target: {fileID: 5576008395377780337, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
+      value: Player/Reset[/Keyboard/r]
+      objectReference: {fileID: 0}
+    - target: {fileID: 5576008395377780337, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5576008395377780337, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5576008395377780337, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 471448781}
+    - target: {fileID: 5576008395377780337, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5576008395377780337, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Respawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 5576008395377780337, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerHealth, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5576008395377780337, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5666809627422006282, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
       propertyPath: m_Enabled
       value: 1
