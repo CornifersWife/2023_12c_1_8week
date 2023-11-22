@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -89,5 +90,11 @@ public class PlayerHealth : MonoBehaviour
         gameObject.transform.position = lastCheckpointPos;
         health = maxHealth;
         playerMovement.enabled = true;
+    }
+
+    public void Respawn(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        Respawn();
     }
 }
