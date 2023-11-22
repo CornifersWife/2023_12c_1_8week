@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
-    using UnityEditor;
+using UnityEditor;
 #endif
-
+using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -16,11 +16,13 @@ public class UIManager : MonoBehaviour
     {
         _bg.SetActive(false);
         _pauseView.SetActive(false);
-        _exitView.SetActive(false);
+        _exitView.SetActive(false);  
     }
 
     public void PauseGame(InputAction.CallbackContext context)
     {
+        //Wywoływane przez input managera, jeśli menu aktywne to je wyłączy, jeśli nie to włączy
+
         if (_pauseView.activeInHierarchy || _exitView.activeInHierarchy)
         {
             ContinueClicked();
@@ -31,6 +33,14 @@ public class UIManager : MonoBehaviour
             _pauseView.SetActive(true);
             Time.timeScale = 0;
         }
+    }
+
+    public void OnLevelWasLoaded(int level)
+    {
+        if (File.Exists(Application.dataPath + "/saves/save.suffering"))
+        {
+            SaveSystem.SimpleSaveSystem.LoadBinary();
+        }     
     }
 
     #region PauseMenu
