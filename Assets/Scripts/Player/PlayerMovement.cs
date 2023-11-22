@@ -279,10 +279,10 @@ public class PlayerMovement : MonoBehaviour {
             transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
         }
 
-        if (rb.velocity.y > 0.1f) {
+        if (rb.velocity.y > 0.1f && !isGrounded) {
             state = hasDoubleJumped ? MovementState.doubleJump : MovementState.jumping;
         }
-        else if (rb.velocity.y < -0.1f) {
+        else if (rb.velocity.y < -0.1f && !isGrounded) {
             state = MovementState.falling;
         }
 
