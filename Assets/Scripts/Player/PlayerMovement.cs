@@ -137,7 +137,8 @@ public class PlayerMovement : MonoBehaviour {
     public void jump(InputAction.CallbackContext context) {
         if (context.canceled) {
             if (rb.velocity.y > 0)
-                StartCoroutine(DelayedVelocityReset());
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+            //StartCoroutine(DelayedVelocityReset());
             return;
         }
 
