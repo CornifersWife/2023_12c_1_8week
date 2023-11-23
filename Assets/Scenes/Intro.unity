@@ -44597,6 +44597,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene Switcher
       objectReference: {fileID: 0}
+    - target: {fileID: 3776690664993277785, guid: adc22c7a3882e054a955894d9696e1bb, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622693674202460068, guid: adc22c7a3882e054a955894d9696e1bb, type: 3}
+      propertyPath: SceneName
+      value: Intro
+      objectReference: {fileID: 0}
     - target: {fileID: 7604694574791578245, guid: adc22c7a3882e054a955894d9696e1bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 86.91692

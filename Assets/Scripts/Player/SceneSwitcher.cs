@@ -1,8 +1,3 @@
-
-#if UNITY_EDITOR
-using UnityEditor;
-using UnityEditor.Build.Content;
-#endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,15 +11,15 @@ public class SceneSwitcher : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision != null && collision.name == "Player")
+        if(collision != null && collision.tag == "Player")
         {
             SaveSystem.SimpleSaveSystem.SaveBinary();
-            SceneManager.LoadScene(SceneName);
+            SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
         }
     }
 
     private void SaveGame(SaveData data) 
     { 
-        data.LevelName = SceneName;
+        data.LevelName = SceneName;    
     }
 }

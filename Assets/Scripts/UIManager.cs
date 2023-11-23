@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
 
     public void OnLevelWasLoaded(int level)
     {
-        if (File.Exists(Application.dataPath + "/saves/save.suffering"))
+        if (File.Exists(SaveSystem.SimpleSaveSystem.GetSaveLocation()))
         {
             SaveSystem.SimpleSaveSystem.LoadBinary();
         }     
