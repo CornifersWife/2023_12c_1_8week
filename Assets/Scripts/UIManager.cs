@@ -61,9 +61,8 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1.0f;
     }
     public void RestartClicked() 
-    { 
-        //TODO: Zrestartowanie gracza do poprzedniego checkpointu
-
+    {
+        //TODO: Tu podpiąć reset
         ContinueClicked();
     }
 
