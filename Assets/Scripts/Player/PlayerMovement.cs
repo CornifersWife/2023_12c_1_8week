@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour {
     [SerializeField] public bool canDoubleJump;
+    [SerializeField] public bool hasWeapon;
     [SerializeField] public float jumpHeight = 7f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private Transform feet;
@@ -68,7 +69,9 @@ public class PlayerMovement : MonoBehaviour {
         hasDoubleJumped = true;
         hasJumped = false;
 
-        canAttack = true;
+        animator.runtimeAnimatorController = animatorBasic;
+        canAttack = false;
+
         canDoubleJump = false;
         Debug.Log(playerManager == null);
         if (playerManager.values.ContainsKey("canAttack")) {
@@ -169,6 +172,7 @@ public class PlayerMovement : MonoBehaviour {
     //wywo³ywane przez inputManager gdy player zmienia broñ
     public void changeWeapon(InputAction.CallbackContext context) {
         if (!context.performed) return;
+        if (!hasWeapon) return;
         //je¿eli player ma domyœln¹ wersje bez broni
         if (animator.runtimeAnimatorController == animatorBasic) {
             //zmieñ na wersjê z broni¹
@@ -292,12 +296,12 @@ public class PlayerMovement : MonoBehaviour {
     private void SaveGame(SaveData data) 
     {
         data.DoubleJump = canDoubleJump;
-        data.Weapon = canAttack;
+        data.Weapon = hasWeapon;
     }
 
     private void LoadGame(SaveData data) 
     { 
         canDoubleJump = data.DoubleJump;
-        canAttack = data.Weapon;
+        hasWeapon = data.Weapon;
     }
 }
