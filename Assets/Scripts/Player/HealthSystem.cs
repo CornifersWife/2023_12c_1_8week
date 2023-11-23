@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class PlayerHealth : MonoBehaviour
     {
         if (playerManager == null) playerManager = PlayerManager.getInstance();
         playerMovement = GetComponent<PlayerMovement>();
+
+        EventSystem.SaveEventSystem.OnSaveGame += SaveGame;
+        EventSystem.SaveEventSystem.OnLoadGame += LoadGame;
+
     }
     
     private void Start()
@@ -32,6 +37,8 @@ public class PlayerHealth : MonoBehaviour
     private void OnDestroy()
     {
        playerManager.values["health"] = health;
+       EventSystem.SaveEventSystem.OnSaveGame -= SaveGame;
+       EventSystem.SaveEventSystem.OnLoadGame -= LoadGame;
     }
     private void Update()
     {
@@ -44,6 +51,18 @@ public class PlayerHealth : MonoBehaviour
                 timer = 0;
             }
         }
+    }
+
+    private void SaveGame(SaveData data) 
+    { 
+        data.Health = health;
+        data.MaxHealth = maxHealth;
+    }
+
+    private void LoadGame(SaveData data) 
+    { 
+        maxHealth = data.MaxHealth;
+        health = data.Health;
     }
     
   //wywo�ywane z innych skrypt�w gdy player ma dosta� jaki� dmg
@@ -71,5 +90,11 @@ public class PlayerHealth : MonoBehaviour
         gameObject.transform.position = lastCheckpointPos;
         health = maxHealth;
         playerMovement.enabled = true;
+    }
+
+    public void Respawn(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        Respawn();
     }
 }

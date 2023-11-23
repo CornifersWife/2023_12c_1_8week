@@ -85,14 +85,19 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         isJumping = false;
-    }
 
+        EventSystem.SaveEventSystem.OnSaveGame += SaveGame;
+        EventSystem.SaveEventSystem.OnLoadGame += LoadGame;
+    }
 
     private void OnDestroy() {
         Debug.Log("saving");
         playerManager.values["canAttack"] = canAttack;
         playerManager.values["canDoubleJump"] = canDoubleJump;
         playerManager.values["animator"] = animator.runtimeAnimatorController;
+
+        EventSystem.SaveEventSystem.OnSaveGame -= SaveGame;
+        EventSystem.SaveEventSystem.OnLoadGame -= LoadGame;
     }
 
     private void Update() {
@@ -132,7 +137,8 @@ public class PlayerMovement : MonoBehaviour {
     public void jump(InputAction.CallbackContext context) {
         if (context.canceled) {
             if (rb.velocity.y > 0)
-                StartCoroutine(DelayedVelocityReset());
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+            //StartCoroutine(DelayedVelocityReset());
             return;
         }
 
@@ -273,14 +279,26 @@ public class PlayerMovement : MonoBehaviour {
             transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
         }
 
-        if (rb.velocity.y > 0.1f) {
+        if (rb.velocity.y > 0.1f && !isGrounded) {
             state = hasDoubleJumped ? MovementState.doubleJump : MovementState.jumping;
         }
-        else if (rb.velocity.y < -0.1f) {
+        else if (rb.velocity.y < -0.1f && !isGrounded) {
             state = MovementState.falling;
         }
 
         if (animator.GetInteger("State") != (int)state)
             animator.SetInteger("State", (int)state);
+    }
+
+    private void SaveGame(SaveData data) 
+    {
+        data.DoubleJump = canDoubleJump;
+        data.Weapon = canAttack;
+    }
+
+    private void LoadGame(SaveData data) 
+    { 
+        canDoubleJump = data.DoubleJump;
+        canAttack = data.Weapon;
     }
 }
