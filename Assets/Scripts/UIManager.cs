@@ -11,24 +11,29 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _pauseView;
     [SerializeField] private GameObject _exitView;
     [SerializeField] private GameObject _bg;
+    [SerializeField] private GameObject _optionsView;
+    [SerializeField] private GameObject _keybindsView;
+    [SerializeField] private PlayerInput _playerController;
+
 
     private void Awake()
     {
         _bg.SetActive(false);
         _pauseView.SetActive(false);
-        _exitView.SetActive(false);  
+        _exitView.SetActive(false);
     }
 
     public void PauseGame(InputAction.CallbackContext context)
     {
         //Wywoływane przez input managera, jeśli menu aktywne to je wyłączy, jeśli nie to włączy
 
-        if (_pauseView.activeInHierarchy || _exitView.activeInHierarchy)
+        if (_bg.activeInHierarchy)
         {
-            ContinueClicked();
+            ContinueClicked();        
         }
         else
         {
+            _playerController.SwitchCurrentActionMap("Menu");
             _bg.SetActive(true);
             _pauseView.SetActive(true);
             Time.timeScale = 0;
@@ -47,9 +52,12 @@ public class UIManager : MonoBehaviour
 
     public void ContinueClicked()
     {
+        _playerController.SwitchCurrentActionMap("Player");
         _bg.SetActive(false);
         _pauseView.SetActive(false);
         _exitView.SetActive(false);
+        _optionsView.SetActive(false);
+        _keybindsView.SetActive(false);
         Time.timeScale = 1.0f;
     }
     public void RestartClicked() 
@@ -60,8 +68,9 @@ public class UIManager : MonoBehaviour
     }
 
     public void OptionsClicked() 
-    { 
-        //TODO: Uruchomienie opcji
+    {
+        _pauseView.SetActive(false);
+        _optionsView.SetActive(true);
     }
 
     public void ExitClicked() 
@@ -87,10 +96,27 @@ public class UIManager : MonoBehaviour
         #endif
     }
 
-    public void BackClicked() 
+    #endregion
+    #region Options View
+    public void KBClicked()
+    {
+        _optionsView.SetActive(false);
+        _keybindsView.SetActive(true);
+    }
+    #endregion
+    #region Universal
+    public void BackClicked()
     {
         _pauseView.SetActive(true);
         _exitView.SetActive(false);
+        _optionsView.SetActive(false);
+
+    }
+    public void KBBackClicked()
+    {
+        _optionsView.SetActive(true);
+        _keybindsView.SetActive(false);
+
     }
     #endregion
 }

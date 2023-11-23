@@ -30,6 +30,8 @@ public class MenuManager : MonoBehaviour
         {
             _continueView.SetActive(false);
         }
+
+
     }
     private void OnDestroy()
     {
@@ -42,11 +44,10 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(SceneName);
     }
 
-    
-
     public void OptionsClicked() 
     {
         _mainView.SetActive(false);
+        _continueView.SetActive(false);
         _optionsView.SetActive(true);
     }
     public void CreditsClicked() 
@@ -83,16 +84,22 @@ public class MenuManager : MonoBehaviour
     }
     #endregion
 
-    #region Credits View
+    #region Universal
     public void BackClicked() 
     {
         _creditsView.SetActive(false);
         _optionsView.SetActive(false);
-        _keybindsView.SetActive(false);
         _mainView.SetActive(true);
     }
+
+    public void KBBackClicked()
+    {
+        _optionsView.SetActive(true);
+        _keybindsView.SetActive(false);
+
+    }
     #endregion
-    
+
     #region Options View
     public void KBClicked() 
     {
