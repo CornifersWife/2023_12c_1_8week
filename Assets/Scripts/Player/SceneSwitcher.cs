@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System.Collections;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEditor.Build.Content;
@@ -10,6 +11,7 @@ public class SceneSwitcher : MonoBehaviour
 {
     public bool isOpen = false;
     [SerializeField] private string SceneName;
+    [SerializeField] Animator anim;
 
     private void Awake()
     {
@@ -22,10 +24,17 @@ public class SceneSwitcher : MonoBehaviour
         {
             if (collision != null && collision.name == "Player")
             {
-              SaveSystem.SimpleSaveSystem.SaveBinary();
-              SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
+                StartCoroutine(loadNewScene());
+                SaveSystem.SimpleSaveSystem.SaveBinary();
             }
         }
+    }
+    IEnumerator loadNewScene()
+    {
+        anim.SetTrigger("OUT");
+        yield return new WaitForSeconds(1);
+                
+        SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
     }
 
     private void SaveGame(SaveData data) 
