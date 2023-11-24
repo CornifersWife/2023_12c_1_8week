@@ -6,11 +6,9 @@ public class CoinCollection : Collectible
 
     public override void Collect()
     {
-        if (enabled) {
-            enabled = false;
-            GetComponent<Animator>().SetBool("Collected", true);
-            CollectibleManager.instance.AddCoinValue(_coinConfig.coinValue);
-        }
-        
+        if (!enabled) return;
+        enabled = false;
+        GetComponent<Animator>().SetBool("Collected", true);
+        CollectibleManager.instance.AddCoinValue(_coinConfig.coinValue);
     }
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2536543338560807247}
   - component: {fileID: 3799467823559722486}
   - component: {fileID: 6423333570276329259}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: Collapsible platform
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ PlatformEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 25363959
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0

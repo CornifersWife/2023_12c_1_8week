@@ -31,13 +31,13 @@ public class Barrel : MonoBehaviour
             StartCoroutine(Break());
         }
         
-        else if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Barrel"))
+        else if (other.gameObject.CompareTag("Enemy"))
         {
             StartCoroutine(Break());
             Destroy(other.gameObject);
         }
         
-        else if (other.gameObject.CompareTag("Wall"))
+        else if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Barrel"))
         {
             StartCoroutine(Break());
         }

@@ -1,4 +1,3 @@
-
 #if UNITY_EDITOR
 using System.Collections;
 using UnityEditor;
@@ -27,7 +26,6 @@ public class SceneSwitcher : MonoBehaviour
             {
                 StartCoroutine(loadNewScene());
                 SaveSystem.SimpleSaveSystem.SaveBinary();
-
             }
         }
     }
@@ -36,11 +34,11 @@ public class SceneSwitcher : MonoBehaviour
         anim.SetTrigger("OUT");
         yield return new WaitForSeconds(1);
                 
-        SceneManager.LoadScene(SceneName);
+        SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
     }
 
     private void SaveGame(SaveData data) 
     { 
-        data.LevelName = SceneName;
+        data.LevelName = SceneName;    
     }
 }
