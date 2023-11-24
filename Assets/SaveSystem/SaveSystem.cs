@@ -6,10 +6,20 @@ namespace SaveSystem
 {
     public static class SimpleSaveSystem
     {
+
+        public const string saveFileName = "/save.suffering";
+        public const string saveFileDirectory = "/../Saves";
+
         public static void SaveBinary()
         {
             BinaryFormatter serializer = new BinaryFormatter();
-            FileStream stream = new FileStream(Application.dataPath + "/saves/save.suffering", FileMode.Create);
+
+            if(!Directory.Exists(Application.dataPath + saveFileDirectory)) 
+            { 
+                Directory.CreateDirectory(Application.dataPath + saveFileDirectory);
+            }         
+
+            FileStream stream = new FileStream(GetSaveLocation(), FileMode.Create);
 
             SaveData data = new SaveData();
             EventSystem.SaveEventSystem.SaveGame(data);
@@ -20,13 +30,23 @@ namespace SaveSystem
 
         public static void LoadBinary()
         {
+
+            //if (!Directory.Exists(Application.dataPath + saveFileDirectory)) { return; }
+
             BinaryFormatter serializer = new BinaryFormatter();
-            FileStream stream = new FileStream(Application.dataPath + "/saves/save.suffering", FileMode.Open);
+
+            FileStream stream = new FileStream(GetSaveLocation(), FileMode.Open);
 
             SaveData data = serializer.Deserialize(stream) as SaveData;
             EventSystem.SaveEventSystem.LoadGame(data);
 
             stream.Close();
         }
+
+        public static string GetSaveLocation() 
+        {
+            return Application.dataPath + saveFileDirectory + saveFileName;
+        }
+
     }
 }

@@ -1,10 +1,8 @@
-
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEditor.Build.Content;
 #endif
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
@@ -24,13 +22,13 @@ public class SceneSwitcher : MonoBehaviour
             if (collision != null && collision.name == "Player")
             {
               SaveSystem.SimpleSaveSystem.SaveBinary();
-              SceneManager.LoadScene(SceneName);
+              SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
             }
         }
     }
 
     private void SaveGame(SaveData data) 
     { 
-        data.LevelName = SceneName;
+        data.LevelName = SceneName;    
     }
 }

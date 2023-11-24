@@ -22,7 +22,7 @@ public class MenuManager : MonoBehaviour
         EventSystem.SaveEventSystem.OnLoadGame += LoadGame;
 
         //Jeśli jest save to pozwalamy wczytać, inaczej ni
-        if (File.Exists(Application.dataPath + "/saves/save.suffering"))
+        if (File.Exists(SaveSystem.SimpleSaveSystem.GetSaveLocation()))
         {
             _continueView.SetActive(true);
         }
@@ -30,6 +30,8 @@ public class MenuManager : MonoBehaviour
         {
             _continueView.SetActive(false);
         }
+
+
     }
     private void OnDestroy()
     {
@@ -39,14 +41,13 @@ public class MenuManager : MonoBehaviour
     #region Main view
     public void StartClicked(string SceneName) 
     {
-        SceneManager.LoadScene(SceneName);
+        SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
     }
-
-    
 
     public void OptionsClicked() 
     {
         _mainView.SetActive(false);
+        _continueView.SetActive(false);
         _optionsView.SetActive(true);
     }
     public void CreditsClicked() 
@@ -73,26 +74,32 @@ public class MenuManager : MonoBehaviour
 
     private void LoadGame(SaveData data) 
     {
-        SceneManager.LoadScene(data.LevelName);
+        SceneManager.LoadScene(data.LevelName, LoadSceneMode.Single);
     }
 
     public void RemoveClicked() 
     {
-        File.Delete(Application.dataPath + "/saves/save.suffering");
+        File.Delete(SaveSystem.SimpleSaveSystem.GetSaveLocation());
         _continueView.SetActive(false);
     }
     #endregion
 
-    #region Credits View
+    #region Universal
     public void BackClicked() 
     {
         _creditsView.SetActive(false);
         _optionsView.SetActive(false);
-        _keybindsView.SetActive(false);
         _mainView.SetActive(true);
     }
+
+    public void KBBackClicked()
+    {
+        _optionsView.SetActive(true);
+        _keybindsView.SetActive(false);
+
+    }
     #endregion
-    
+
     #region Options View
     public void KBClicked() 
     {

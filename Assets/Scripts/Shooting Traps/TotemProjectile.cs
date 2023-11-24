@@ -24,6 +24,7 @@ public class TotemProjectile : MonoBehaviour
             collision.gameObject.GetComponent<PlayerHealth>().takeDamage(100);         
         }
         GetComponent<Animator>().SetTrigger("IsHit");
+        _rb.velocity = _rb.velocity * 0.2f;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

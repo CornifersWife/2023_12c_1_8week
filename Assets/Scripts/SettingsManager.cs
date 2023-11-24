@@ -10,6 +10,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private AudioMixer musicMixer;
     [SerializeField] private AudioMixer SFXMixer;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
+    [SerializeField] private Toggle fullscreenToggle;
 
     private Resolution[] resolutions;
     void Start()
@@ -26,7 +27,7 @@ public class SettingsManager : MonoBehaviour
             string option = resolutions[i].width + " x " + resolutions[i].height;
             options.Add(option);
 
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
             }
@@ -34,6 +35,8 @@ public class SettingsManager : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+
+        fullscreenToggle.GetComponent<Toggle>().isOn = Screen.fullScreenMode == FullScreenMode.ExclusiveFullScreen ? true : false;
     }
     public void SetMusicVolume(float volume)
     {
@@ -52,12 +55,15 @@ public class SettingsManager : MonoBehaviour
 
     public void SetFullscreen(bool isFullscreen)
     {
-        Screen.fullScreen = isFullscreen;
+        Screen.fullScreenMode = isFullscreen ? FullScreenMode.ExclusiveFullScreen : FullScreenMode.Windowed;
     }
 
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        if(!resolution.Equals(Screen.currentResolution)) 
+        {
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        }      
     }
 }
