@@ -337,7 +337,7 @@ MonoBehaviour:
   feet: {fileID: 7393292959119918922}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 65664
+    m_Bits: 196736
   swordAttackCooldown: 0.75
   attackDamageTime: 0.15
   animatorBasic: {fileID: 9100000, guid: d206ace0f167a124bb4586dab70ae688, type: 2}
