@@ -379,6 +379,7 @@ MonoBehaviour:
   - Sample text
   continueButton: {fileID: 1186819269664101544}
   hostEntity: {fileID: 0}
+  moveBubble: 1
 --- !u!114 &8616687527587771651
 MonoBehaviour:
   m_ObjectHideFlags: 0
