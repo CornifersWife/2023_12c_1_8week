@@ -6760,10 +6760,6 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 64974825}
-    - target: {fileID: 1405287457293813418, guid: 855439dfececb834f9a92a84c23266f7, type: 3}
-      propertyPath: moveBubble
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5112673522206449241, guid: 855439dfececb834f9a92a84c23266f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.91
@@ -6807,14 +6803,6 @@ PrefabInstance:
     - target: {fileID: 7452816704050732640, guid: 855439dfececb834f9a92a84c23266f7, type: 3}
       propertyPath: m_Name
       value: Crab
-      objectReference: {fileID: 0}
-    - target: {fileID: 8562299887121248778, guid: 855439dfececb834f9a92a84c23266f7, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 8562299887121248778, guid: 855439dfececb834f9a92a84c23266f7, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 2.33
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

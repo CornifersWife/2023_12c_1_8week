@@ -68,7 +68,7 @@ public class Crab : MonoBehaviour
     private int updateMovementState()
     {
         MovementState state = MovementState.idle;
-
+        if (!canMove) return (int)state;
         if (rb.velocity.x < 0f)
         {
             state = MovementState.running;
