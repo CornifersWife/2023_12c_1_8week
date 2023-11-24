@@ -8,11 +8,26 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: e4ebb5084bb213246a6e58f93077e20f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Intro.unity
     guid: fb74c6d72c8db084ea172aae7c548de1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Intro camera showcase.unity
     guid: fc3f15c35008861408b4c2e255ec85c1
+  - enabled: 1
+    path: Assets/Scenes/INTRO LEVEL.unity
+    guid: 6b1d117fb7211ab479c5656e5aac7b90
+  - enabled: 1
+    path: Assets/Scenes/Hub1.unity
+    guid: fdfc0eb48dcff1340ab154c6c3591816
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: b1e87d2aaa2dfcd4a8ddf37e8fda1274
+  - enabled: 1
+    path: Assets/Scenes/Hub2.unity
+    guid: 1b7e851667dfae54e81e7e9585a0f5ca
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 79dd451496c90324c98df37a2a6bb4f2
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 8ce11c8f25c4af7429f3524d0cacc4bf, type: 2}

@@ -70082,6 +70082,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene Switcher
       objectReference: {fileID: 0}
+    - target: {fileID: 5622693674202460068, guid: adc22c7a3882e054a955894d9696e1bb, type: 3}
+      propertyPath: SceneName
+      value: Hub2
+      objectReference: {fileID: 0}
     - target: {fileID: 5699316692615037154, guid: adc22c7a3882e054a955894d9696e1bb, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -72706,6 +72710,10 @@ PrefabInstance:
     - target: {fileID: 2631924698457790205, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3385596900798164727, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
+      propertyPath: hasWeapon
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3385596900798164727, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
       propertyPath: groundLayer.m_Bits

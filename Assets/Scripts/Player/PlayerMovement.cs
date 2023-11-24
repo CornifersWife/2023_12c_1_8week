@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour {
         animator.runtimeAnimatorController = animatorBasic;
         canAttack = false;
 
-        canDoubleJump = false;
+        //canDoubleJump = false;
         Debug.Log(playerManager == null);
         if (playerManager.values.ContainsKey("canAttack")) {
             canAttack = (bool)playerManager.values["canAttack"];
