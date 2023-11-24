@@ -15,6 +15,8 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField] private GameObject continueButton;
     [SerializeField] private GameObject hostEntity;
 
+    [SerializeField] private bool moveBubble = true;
+
     private int index;
     private bool finished;
     private Animator animator;
@@ -32,6 +34,7 @@ public class SpeechBubble : MonoBehaviour
     
     private void Start()
     {
+        if (!moveBubble) return;
         //zmiana pozycji na pozycję nad host entity
         Transform t = hostEntity.transform;
         Vector2 newPosition = new Vector2(t.position.x, t.position.y + 2f);
