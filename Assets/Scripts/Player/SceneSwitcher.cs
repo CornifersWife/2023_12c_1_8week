@@ -1,9 +1,9 @@
 #if UNITY_EDITOR
-using System.Collections;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEditor.Build.Content;
 #endif
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
