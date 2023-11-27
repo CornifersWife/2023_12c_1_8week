@@ -1426,10 +1426,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 2032552417}
-    - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 280444601}
@@ -72701,10 +72697,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 2032552417}
-    - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 197233581}
@@ -110816,10 +110808,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 2032552417}
-    - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 1214786739}
@@ -111335,10 +111323,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 2032552417}
     - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
@@ -114069,10 +114053,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 2032552417}
-    - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 1983783743}
@@ -114557,10 +114537,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 2032552417}
-    - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 483357344}
@@ -114693,10 +114669,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 2032552417}
-    - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 25612125}
@@ -114707,10 +114679,6 @@ PrefabInstance:
     - target: {fileID: 7209760415308298382, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
       propertyPath: m_Name
       value: Fierce Tooth
-      objectReference: {fileID: 0}
-    - target: {fileID: 7209760415308298382, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -115063,10 +115031,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 2032552417}
     - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
@@ -116867,10 +116831,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 2032552417}
-    - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 477377633}
@@ -117832,10 +117792,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 2032552417}
-    - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 347388574}
@@ -117985,11 +117941,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d41ecccb2a4252445862d1e7a08b6807, type: 3}
---- !u!20 &1901789279 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 8900384712522973708, guid: d41ecccb2a4252445862d1e7a08b6807, type: 3}
-  m_PrefabInstance: {fileID: 1901789278}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1928389245
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -118213,10 +118164,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 2032552417}
     - target: {fileID: 6263762831016837587, guid: 126b0070175eb554388928dc6d7a2786, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
@@ -118655,17 +118602,6 @@ Transform:
   - {fileID: 197233581}
   m_Father: {fileID: 750520578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2032552417 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6731825485125302672, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
-  m_PrefabInstance: {fileID: 2115342772}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a64513149052a44586a0f2abf8cb8e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2061530141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119749,7 +119685,7 @@ PrefabInstance:
     - target: {fileID: 4940925548808316284, guid: b5207f139ed6cb6428df6c9dac68351b, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 1901789279}
+      objectReference: {fileID: 0}
     - target: {fileID: 6544307190577376295, guid: b5207f139ed6cb6428df6c9dac68351b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -87.464966
@@ -119977,11 +119913,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2631924698457790205, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.19
+      value: -12.49
       objectReference: {fileID: 0}
     - target: {fileID: 2631924698457790205, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.61
+      value: -1.01
       objectReference: {fileID: 0}
     - target: {fileID: 2631924698457790205, guid: 5933d1c1ae26b0440a7e56fb020a106f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -120319,7 +120255,6 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1901789278}
   - {fileID: 2084280656}
   - {fileID: 1407113072}
   - {fileID: 1544537209}
@@ -120330,3 +120265,4 @@ SceneRoots:
   - {fileID: 1795742810}
   - {fileID: 346159111}
   - {fileID: 422606322}
+  - {fileID: 1901789278}
