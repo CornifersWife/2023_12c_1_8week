@@ -71607,34 +71607,6 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.14
       objectReference: {fileID: 0}
-    - target: {fileID: 7129015091447858043, guid: bd95c8fbf9685314189901944721dc4d, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 651d9193da361a845aaefdf716fa3703, type: 3}
-    - target: {fileID: 7129015091447858043, guid: bd95c8fbf9685314189901944721dc4d, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7129015091447858043, guid: bd95c8fbf9685314189901944721dc4d, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7129015091447858043, guid: bd95c8fbf9685314189901944721dc4d, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7129015091447858043, guid: bd95c8fbf9685314189901944721dc4d, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7129015091447858043, guid: bd95c8fbf9685314189901944721dc4d, type: 3}
-      propertyPath: m_SortingLayer
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7129015091447858043, guid: bd95c8fbf9685314189901944721dc4d, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1449148387
-      objectReference: {fileID: 0}
     - target: {fileID: 7989790894971177346, guid: bd95c8fbf9685314189901944721dc4d, type: 3}
       propertyPath: m_LocalScale.x
       value: 8.328622
