@@ -6,10 +6,12 @@ public class CannonBall : MonoBehaviour
 {
 
     [SerializeField] private int despawnAfter = 10;
+    [SerializeField] private bool canPlayerJumpOff;
     public float speed = 10f;
     public int damage = 10;
     private Animator animator;
     private Rigidbody2D rb;
+
 
     void Start()
     {
@@ -34,7 +36,7 @@ public class CannonBall : MonoBehaviour
     }
     private bool IsBelowPlayerFeet(Collider2D playerCollider)
     {
-        return playerCollider.bounds.min.y > transform.position.y;
+        return  canPlayerJumpOff && playerCollider.bounds.min.y > transform.position.y;
     }
 
 
