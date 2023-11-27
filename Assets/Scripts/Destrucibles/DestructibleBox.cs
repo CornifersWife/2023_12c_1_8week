@@ -27,6 +27,7 @@ public class DestructibleBox : Destructible
         animator.SetInteger("HitCount", animator.GetInteger("HitCount")+1);
         if (animator.GetInteger("HitCount") == 2)
         {
+            GetComponent<BoxCollider2D>().enabled = false;
             SwitchToShattered();   
         }
     }

@@ -73,6 +73,7 @@ public class PlayerHealth : MonoBehaviour
         if(health <= 0)
         {
             playerMovement.enabled = false;
+            GetComponent<BoxCollider2D>().enabled = true;
             playerMovement.rb.velocity = Vector3.zero;
             animator.SetTrigger("DeadHit");
         }
@@ -87,6 +88,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void Respawn()
     {
+        GetComponent<BoxCollider2D>().enabled = true;
         animator.SetTrigger("Dead");
 
         gameObject.transform.position = lastCheckpointPos;
