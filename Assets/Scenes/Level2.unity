@@ -1094,42 +1094,6 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.15
       objectReference: {fileID: 0}
-    - target: {fileID: 7632392563969280266, guid: 4d6c5b865282c1d478a7607d91b87e6f, type: 3}
-      propertyPath: m_Size.x
-      value: 1.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 7632392563969280266, guid: 4d6c5b865282c1d478a7607d91b87e6f, type: 3}
-      propertyPath: m_Size.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7632392563969280266, guid: 4d6c5b865282c1d478a7607d91b87e6f, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 07a9dfe32192a0945b74b87054e330c0, type: 3}
-    - target: {fileID: 7632392563969280266, guid: 4d6c5b865282c1d478a7607d91b87e6f, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7632392563969280266, guid: 4d6c5b865282c1d478a7607d91b87e6f, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7632392563969280266, guid: 4d6c5b865282c1d478a7607d91b87e6f, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7632392563969280266, guid: 4d6c5b865282c1d478a7607d91b87e6f, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7632392563969280266, guid: 4d6c5b865282c1d478a7607d91b87e6f, type: 3}
-      propertyPath: m_SortingLayer
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7632392563969280266, guid: 4d6c5b865282c1d478a7607d91b87e6f, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1449148387
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -119703,11 +119667,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4344470223793262705, guid: f98173d0c1715204994789524920181b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.3594666
+      value: 2.43
       objectReference: {fileID: 0}
     - target: {fileID: 4344470223793262705, guid: f98173d0c1715204994789524920181b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.642317
+      value: 20.04
       objectReference: {fileID: 0}
     - target: {fileID: 4344470223793262705, guid: f98173d0c1715204994789524920181b, type: 3}
       propertyPath: m_LocalPosition.z
