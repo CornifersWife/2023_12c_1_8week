@@ -41,6 +41,7 @@ public class MenuManager : MonoBehaviour
     #region Main view
     public void StartClicked(string SceneName) 
     {
+        RemoveClicked();
         SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
     }
 
