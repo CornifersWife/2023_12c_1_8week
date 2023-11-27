@@ -6,6 +6,7 @@ public class CrabMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 3;
     [SerializeField] private Transform[] patrolPoints;
+    [SerializeField] private bool canMove = true;
 
     [Header("Attack")]
     [SerializeField] private AIPlayerDetector playerDetectorShortRange;
@@ -57,14 +58,16 @@ public class CrabMovement : MonoBehaviour
             rb.velocity = Vector3.zero;
             return;
         }
-            
 
-        rb.velocity = new Vector2((rb.position.x - patrolPoints[patrolDestination].position.x) < 0 ? moveSpeed : -moveSpeed, rb.velocity.y);
-        if (Mathf.Abs(rb.position.x - patrolPoints[patrolDestination].position.x) < .2f)
+        if (canMove)
         {
-            patrolDestination++;
-            if (patrolDestination >= patrolPoints.Length)
-                patrolDestination = 0;
+            rb.velocity = new Vector2((rb.position.x - patrolPoints[patrolDestination].position.x) < 0 ? moveSpeed : -moveSpeed, rb.velocity.y);
+            if (Mathf.Abs(rb.position.x - patrolPoints[patrolDestination].position.x) < .2f)
+            {
+                patrolDestination++;
+                if (patrolDestination >= patrolPoints.Length)
+                    patrolDestination = 0;
+            }
         }
     }
 
@@ -108,6 +111,7 @@ public class CrabMovement : MonoBehaviour
     private int updateMovementState()
     {
         MovementState state = MovementState.idle;
+        
 
         if (hasAttacked)
         {
@@ -120,18 +124,19 @@ public class CrabMovement : MonoBehaviour
             state = MovementState.anticipating;
             return (int)state;
         }
-
-        if (rb.velocity.x < 0f)
+        if (canMove)
         {
-            state = MovementState.running;
-            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+            if (rb.velocity.x < 0f)
+            {
+                state = MovementState.running;
+                transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+            }
+            else if (rb.velocity.x > 0f)
+            {
+                state = MovementState.running;
+                transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+            }
         }
-        else if (rb.velocity.x > 0f)
-        {
-            state = MovementState.running;
-            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
-        }
-
         if (rb.velocity.y > 0.1f)
         {
             state = MovementState.jumping;
