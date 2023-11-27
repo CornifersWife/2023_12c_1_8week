@@ -73,6 +73,7 @@ public class PlayerHealth : MonoBehaviour
         if(health <= 0)
         {
             playerMovement.enabled = false;
+            playerMovement.rb.velocity = Vector3.zero;
             animator.SetTrigger("DeadHit");
         }
         else
@@ -87,6 +88,7 @@ public class PlayerHealth : MonoBehaviour
     public void Respawn()
     {
         animator.SetTrigger("Dead");
+
         gameObject.transform.position = lastCheckpointPos;
         health = maxHealth;
         playerMovement.enabled = true;
