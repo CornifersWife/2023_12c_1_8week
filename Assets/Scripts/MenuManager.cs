@@ -4,6 +4,7 @@ using UnityEditor;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Runtime.CompilerServices;
 
 public class MenuManager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject _optionsView;
     [SerializeField] private GameObject _keybindsView;
     [SerializeField] private GameObject _continueView;
+
+    private bool _isSave;
+
     private void Awake()
     {
         _mainView.SetActive(true);
@@ -25,10 +29,12 @@ public class MenuManager : MonoBehaviour
         if (File.Exists(SaveSystem.SimpleSaveSystem.GetSaveLocation()))
         {
             _continueView.SetActive(true);
+            _isSave = true;
         }
         else 
         {
             _continueView.SetActive(false);
+            _isSave = false;
         }
 
 
@@ -54,6 +60,7 @@ public class MenuManager : MonoBehaviour
     public void CreditsClicked() 
     { 
         _mainView.SetActive(false);
+        _continueView.SetActive(false);
         _creditsView.SetActive(true);
     }
     public void ExitClicked() 
@@ -82,6 +89,7 @@ public class MenuManager : MonoBehaviour
     {
         File.Delete(SaveSystem.SimpleSaveSystem.GetSaveLocation());
         _continueView.SetActive(false);
+        _isSave = false;
     }
     #endregion
 
@@ -91,6 +99,7 @@ public class MenuManager : MonoBehaviour
         _creditsView.SetActive(false);
         _optionsView.SetActive(false);
         _mainView.SetActive(true);
+        if(_isSave) _continueView.SetActive(true);
     }
 
     public void KBBackClicked()
