@@ -70130,6 +70130,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8512587355177825098, guid: adc22c7a3882e054a955894d9696e1bb, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -76033,6 +76037,7 @@ SceneRoots:
   - {fileID: 374091335}
   - {fileID: 511110380}
   - {fileID: 1509635679}
+  - {fileID: 934251607}
   - {fileID: 449049265}
   - {fileID: 1898241351}
   - {fileID: 1918988254}
@@ -76054,7 +76059,6 @@ SceneRoots:
   - {fileID: 750067916}
   - {fileID: 1360111859}
   - {fileID: 660861443}
-  - {fileID: 934251607}
   - {fileID: 1644428118}
   - {fileID: 1104607830}
   - {fileID: 1345850501}
